@@ -6,13 +6,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Saurashtra">
+<meta name="apple-mobile-web-app-title" content="Sourashtra">
 <meta name="theme-color" content="#f7f5f2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#16161a" media="(prefers-color-scheme: dark)">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-180.png">
-<title>Saurashtra</title>
+<title>Sourashtra</title>
 <style>
 :root{
   --bg:#f7f5f2; --card:#fff; --ink:#1b1b1f; --muted:#6b6b73; --line:#e4e0da;
@@ -254,7 +254,7 @@ function home(){
   const withAudio = PHRASES.filter(p => p.audio).length;
   const nextDue = Object.values(progress).map(v => v.due).sort()[0];
   show(`
-    <h1>Saurashtra</h1>
+    <h1>Sourashtra</h1>
     <p class="sub">${PHRASES.length} phrases · ${fresh} not started${
       !due && nextDue && nextDue > today() ? ` · next review ${esc(nextDue)}` : ""}</p>
     <div class="stats">
@@ -264,12 +264,12 @@ function home(){
     </div>
     <div class="grouphead">Practice</div>
     <button class="btn primary" data-mode="recall">
-      See English → say it
-      <span class="mhint">then hear the answer</span>
+      English → Sourashtra
+      <span class="mhint">read the English, say it, then hear the answer</span>
     </button>
     <button class="btn" data-mode="listen">
-      Hear it → guess the meaning
-      <span class="mhint">${withAudio} with audio</span>
+      Sourashtra → English
+      <span class="mhint">hear it and work out the meaning · ${withAudio} with audio</span>
     </button>
     <div class="grouphead">Reference</div>
     <button class="btn" data-browse>Browse</button>
@@ -288,7 +288,7 @@ function home(){
 /* ---------- practice -------------------------------------------------- */
 let session = [], idx = 0;
 
-const MODE_NAME = {recall: "See English → say it", listen: "Hear it → guess the meaning"};
+const MODE_NAME = {recall: "English → Sourashtra", listen: "Sourashtra → English"};
 
 /* Choose what to practise before starting. Going straight into a mixed session
    makes it impossible to drill the one category you actually need today. */
@@ -302,7 +302,8 @@ function pickCategory(mode){
     <p class="sub">What do you want to practise?</p>
     <button class="btn primary" data-cat="">
       Everything, mixed
-      <span class="mhint">${pool.length} phrases · ${dueIn(pool)} due</span>
+      <span class="mhint">${pool.filter(p => progress[p.id]).length}/${pool.length} done${
+        dueIn(pool) ? ` · ${dueIn(pool)} due` : ""}</span>
     </button>
     <div class="grouphead">Or one category</div>`;
 
@@ -310,12 +311,9 @@ function pickCategory(mode){
     const rows = pool.filter(p => p.category === cid);
     if (!rows.length) continue;
     const due = dueIn(rows);
-    const started = rows.filter(p => progress[p.id]).length;
-    const hint = due ? `${due} due`
-               : started === rows.length ? "all started"
-               : started ? `${started} started` : "";
+    const done = rows.filter(p => progress[p.id]).length;
     html += `<button class="btn" data-cat="${cid}">${esc(CATS[cid])}
-      <span class="mhint">${rows.length} phrases${hint ? ` · ${hint}` : ""}</span>
+      <span class="mhint">${done}/${rows.length} done${due ? ` · ${due} due` : ""}</span>
     </button>`;
   }
   show(html);
@@ -361,7 +359,7 @@ function card(){
     ? `<button class="play" data-play>▶ Play again</button>
        <p class="ask">What does this mean?</p>`
     : `<p class="en">${esc(p.en)}</p>
-       <p class="ask">Say it out loud in Saurashtra.</p>`;
+       <p class="ask">Say it out loud in Sourashtra.</p>`;
 
   show(`${head}<div class="card"><div class="stagetag">${tag}</div>${body}</div>
         <button class="btn primary" data-reveal>Reveal</button>`);
@@ -440,7 +438,7 @@ function browse(){
   };
 
   show(`<div class="topbar"><button class="back" data-home>‹ Home</button></div>
-    <input class="search" id="q" placeholder="Search English or Saurashtra"
+    <input class="search" id="q" placeholder="Search English or Sourashtra"
            autocapitalize="off" autocorrect="off" spellcheck="false">
     <div id="list">${draw()}</div>`);
   bindHome();

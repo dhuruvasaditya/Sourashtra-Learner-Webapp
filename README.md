@@ -19,12 +19,12 @@ mixed. A session is about 20 cards, and the app tracks which ones are due.
 
 | Mode | You see | You do |
 |---|---|---|
-| **See English → say it** | the English | say it aloud in Sourashtra, tap Reveal |
-| **Hear it → guess the meaning** | audio plays | work out what it means, tap Reveal |
+| **English → Sourashtra** | the English | say it aloud in Sourashtra, tap Reveal |
+| **Sourashtra → English** | audio plays | work out what it means, tap Reveal |
 
 The category step matters: drilling *Food* before a family dinner beats a random
-mix of everything. Each category shows how many phrases it holds and how far in
-you are.
+mix of everything. Each category shows how far through it you are — `4/17 done`
+— plus how many are due.
 
 Spaced repetition means a category you just finished will not be due again for a
 couple of days. When that happens the app offers **Practise anyway**, which
