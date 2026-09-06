@@ -84,17 +84,19 @@ One primary button: **Practice today**. Two secondary links: **Browse** and
 
 ### Practice session
 
-Ten minutes, ~20 cards: 5 new + 15 due for review. Each card runs one of three
-stages, and an item climbs the stages as it is learned:
+Ten minutes, ~20 cards: 5 new + 15 due for review. The learner picks the mode
+from the home screen; it applies to the whole session:
 
-| Stage | Shown | Learner does | Then reveals |
+| Mode | Shown | Learner does | Then reveals |
 |---|---|---|---|
 | **Listen** | audio auto-plays | guess the meaning | English + `sa` + `lit` |
 | **Recall** | English text | **says it out loud**, taps Reveal | audio + `sa` + `lit` |
-| **Produce** | English text | types the transliteration | correct spelling + audio |
 
 Recognition feels like learning and isn't. The learner must produce the phrase
 before seeing the answer — that retrieval effort is the entire mechanism.
+
+A typing mode was built and removed: spelling a transliteration is not a skill
+worth drilling, and marking a phrase wrong over a doubled vowel is noise.
 
 After each reveal: two buttons, **Again** and **Got it**. That is the whole
 grading UI.
@@ -109,8 +111,8 @@ grading UI.
 | 4 | +12 days |
 | 5 | +30 days |
 
-**Got it** promotes one box, **Again** drops straight to box 1. Stage advances
-(Listen → Recall → Produce) at boxes 2 and 4.
+**Got it** promotes one box, **Again** drops straight to box 1. The mode is the
+learner's choice, so boxes only control scheduling.
 
 State lives in `localStorage`. No accounts. Provide a one-tap export/import of
 the progress blob so a phone reset doesn't erase six months of work.
@@ -123,9 +125,11 @@ with family — make it fast and make it the second thing on the home screen.
 
 ### Listen mode
 
-Hands-free playlist for one category: audio → 2s gap for the learner to repeat
-→ English → next item. For dishes, driving, walking. Roughly twenty lines of JS
-and it is where passive hours turn into real exposure.
+Hands-free playlist for one category: audio → pause for the learner to repeat →
+next item, with the card on screen to read. For dishes, driving, walking. Roughly
+twenty lines of JS and it is where passive hours turn into real exposure.
+No text-to-speech — a synthetic English voice reading the answer is unpleasant
+and adds nothing over the text already on screen.
 
 ## Recorder requirements (`record.py`, Tkinter)
 

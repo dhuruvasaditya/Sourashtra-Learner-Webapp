@@ -77,13 +77,6 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 }
 .play.ghost{background:transparent;color:var(--accent);border:1px solid currentColor}
 .play[disabled]{opacity:.35}
-input[type=text]{
-  width:100%;padding:15px;font-size:19px;border-radius:12px;background:var(--bg);
-  color:var(--ink);border:1px solid var(--line);margin-top:16px;
-}
-input[type=text]:focus{outline:2px solid var(--accent);outline-offset:-1px}
-.verdict{font-size:15px;font-weight:600;margin-top:12px}
-.verdict.ok{color:var(--good)} .verdict.no{color:var(--again)}
 .search{
   width:100%;padding:14px 16px;font-size:17px;border-radius:12px;background:var(--card);
   color:var(--ink);border:1px solid var(--line);margin-bottom:20px;
@@ -164,7 +157,7 @@ function stageFor(p){
   }
   const st = progress[p.id];
   const box = st ? st.box : 1;
-  let stage = box >= 4 ? "produce" : box >= 2 ? "recall" : "listen";
+  let stage = box >= 2 ? "recall" : "listen";
   if (stage === "listen" && !p.audio) stage = "recall";   // nothing to play yet
   return stage;
 }
@@ -268,10 +261,6 @@ function home(){
       See English → say it
       <span class="mhint">then hear the answer</span>
     </button>
-    <button class="btn" data-mode="produce">
-      See English → type it
-      <span class="mhint">hardest, checks your spelling</span>
-    </button>
     <div class="grouphead">Reference</div>
     <button class="btn" data-browse>Browse</button>
     <button class="btn" data-listen>Listen hands-free</button>
@@ -311,20 +300,13 @@ function card(){
   const stage = stageFor(p);
   const pct = Math.round(idx / session.length * 100);
   const head = topbar(pct, `${idx+1}/${session.length}`);
-  const tag = {listen:"Listen", recall:"Say it", produce:"Type it"}[stage];
+  const tag = stage === "listen" ? "Listen" : "Say it";
 
-  let body;
-  if (stage === "listen"){
-    body = `<button class="play" data-play>▶ Play again</button>
-            <p class="ask">What does this mean?</p>`;
-  } else if (stage === "recall"){
-    body = `<p class="en">${esc(p.en)}</p>
-            <p class="ask">Say it out loud in Saurashtra.</p>`;
-  } else {
-    body = `<p class="en">${esc(p.en)}</p>
-            <input type="text" id="try" autocapitalize="off" autocorrect="off"
-                   spellcheck="false" placeholder="type the transliteration">`;
-  }
+  const body = stage === "listen"
+    ? `<button class="play" data-play>▶ Play again</button>
+       <p class="ask">What does this mean?</p>`
+    : `<p class="en">${esc(p.en)}</p>
+       <p class="ask">Say it out loud in Saurashtra.</p>`;
 
   show(`${head}<div class="card"><div class="stagetag">${tag}</div>${body}</div>
         <button class="btn primary" data-reveal>Reveal</button>`);
@@ -332,30 +314,16 @@ function card(){
   bindHome();
   on("[data-play]","click",()=>play(p.audio));
   on("[data-reveal]","click",()=>reveal(p, stage));
-  const inp = document.getElementById("try");
-  if (inp){
-    inp.addEventListener("keydown", e => { if (e.key === "Enter") reveal(p, stage); });
-  }
   if (stage === "listen") play(p.audio);
 }
 
-function normalizeTry(s){ return (s||"").toLowerCase().replace(/[^a-z]/g,""); }
-
 function reveal(p, stage){
   const pct = Math.round((idx + 0.5) / session.length * 100);
-  let verdict = "";
-  if (stage === "produce"){
-    const typed = document.getElementById("try").value;
-    const ok = normalizeTry(typed) === normalizeTry(p.sa);
-    verdict = `<p class="verdict ${ok?"ok":"no"}">
-      ${ok ? "✓ Correct" : "✗ You typed: " + esc(typed || "nothing")}</p>`;
-  }
   show(`${topbar(pct, `${idx+1}/${session.length}`)}
     <div class="card">
       <p class="sa">${esc(p.sa)}</p>
       <p class="en">${esc(p.en)}</p>
       ${p.lit ? `<p class="lit">${esc(p.lit)}</p>` : ""}
-      ${verdict}
       ${p.audio ? `<button class="play ghost" data-play>▶ Play</button>` : ""}
       ${p.note ? `<p class="note">${esc(p.note)}</p>` : ""}
     </div>
