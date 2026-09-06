@@ -23,9 +23,13 @@ mixed. A session is about 20 cards, and the app tracks which ones are due.
 | **Hear it → guess the meaning** | audio plays | work out what it means, tap Reveal |
 
 The category step matters: drilling *Food* before a family dinner beats a random
-mix of everything. Each category shows how many phrases it holds and how many
-are due. At the end of a session you can go another round, switch category, or
-go home.
+mix of everything. Each category shows how many phrases it holds and how far in
+you are.
+
+Spaced repetition means a category you just finished will not be due again for a
+couple of days. When that happens the app offers **Practise anyway**, which
+ignores the schedule and runs the category regardless — the same as **Practise
+these again** at the end of a session.
 
 Reveal shows the transliteration, the English, the gloss, any usage note, and
 plays the recording. Then grade yourself: **Again** or **Got it**. Saying the
@@ -58,8 +62,13 @@ you read along. For dishes, driving, walking.
 
 ### Progress
 
-Kept in the browser under `saurashtra.progress.v1`. It survives reloads and app
-restarts, but it is **per device** — clearing Safari data or moving to a new phone
+The home screen shows **Due now** (ready for review), **Learning** (started, not
+yet mastered) and **Learned** (answered right four times running). A phrase has
+to survive four correct reviews spread over days before it counts as learned, so
+that last number moves slowly on purpose.
+
+Progress is kept in the browser under `saurashtra.progress.v1`. It survives
+reloads and app restarts, but it is **per device** — clearing Safari data or moving to a new phone
 loses it. **Export progress** on the home screen copies a blob that **Import**
 restores on the other device.
 

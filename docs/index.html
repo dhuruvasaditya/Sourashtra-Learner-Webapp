@@ -174,10 +174,14 @@ function dueList(){
 }
 function newList(){ return PHRASES.filter(p => !progress[p.id]); }
 
-function buildSession(mode, cid){
+const SESSION_MAX = NEW_PER_SESSION + REVIEW_PER_SESSION;
+
+function buildSession(mode, cid, anyway){
   // Listen mode can only use phrases that actually have a recording.
   let pool = mode === "listen" ? PHRASES.filter(p => p.audio) : PHRASES;
   if (cid) pool = pool.filter(p => p.category === cid);
+  // "Practise anyway" ignores the schedule — you asked for these cards.
+  if (anyway) return shuffle(pool).slice(0, SESSION_MAX);
   const t = today();
   const due = shuffle(pool.filter(p => progress[p.id] && progress[p.id].due <= t))
                 .slice(0, REVIEW_PER_SESSION);
@@ -245,14 +249,17 @@ function home(){
   forcedStage = null;
   chosenCat = null;
   const due = dueList().length, fresh = newList().length;
-  const learned = PHRASES.filter(p => progress[p.id] && progress[p.id].box >= 4).length;
+  const learning = PHRASES.filter(p => progress[p.id] && progress[p.id].box < 4).length;
+  const learned  = PHRASES.filter(p => progress[p.id] && progress[p.id].box >= 4).length;
   const withAudio = PHRASES.filter(p => p.audio).length;
+  const nextDue = Object.values(progress).map(v => v.due).sort()[0];
   show(`
     <h1>Saurashtra</h1>
-    <p class="sub">${PHRASES.length} phrases</p>
+    <p class="sub">${PHRASES.length} phrases · ${fresh} not started${
+      !due && nextDue && nextDue > today() ? ` · next review ${esc(nextDue)}` : ""}</p>
     <div class="stats">
-      <div class="stat"><b>${due}</b><span>Due</span></div>
-      <div class="stat"><b>${fresh}</b><span>New</span></div>
+      <div class="stat"><b>${due}</b><span>Due now</span></div>
+      <div class="stat"><b>${learning}</b><span>Learning</span></div>
       <div class="stat"><b>${learned}</b><span>Learned</span></div>
     </div>
     <div class="grouphead">Practice</div>
@@ -303,8 +310,12 @@ function pickCategory(mode){
     const rows = pool.filter(p => p.category === cid);
     if (!rows.length) continue;
     const due = dueIn(rows);
+    const started = rows.filter(p => progress[p.id]).length;
+    const hint = due ? `${due} due`
+               : started === rows.length ? "all started"
+               : started ? `${started} started` : "";
     html += `<button class="btn" data-cat="${cid}">${esc(CATS[cid])}
-      <span class="mhint">${rows.length} phrases${due ? ` · ${due} due` : ""}</span>
+      <span class="mhint">${rows.length} phrases${hint ? ` · ${hint}` : ""}</span>
     </button>`;
   }
   show(html);
@@ -312,18 +323,26 @@ function pickCategory(mode){
   on("[data-cat]","click",e=>startPractice(mode, e.currentTarget.dataset.cat || null));
 }
 
-function startPractice(mode, cid){
+function startPractice(mode, cid, anyway){
   forcedStage = mode || null;
   chosenCat = cid || null;
-  session = buildSession(mode, cid);
+  session = buildSession(mode, cid, anyway);
   idx = 0;
   if (!session.length){
+    // Nothing is due, but the cards still exist — offer them anyway rather
+    // than dead-ending someone who simply wants to practise.
+    const spare = buildSession(mode, cid, true).length;
+    const where = cid ? esc(CATS[cid]) : "everything";
     show(`<div class="done"><div class="big">✓</div>
-      <h1>Nothing to practise</h1>
-      <p class="sub">${cid ? "Nothing left in " + esc(CATS[cid]) + "." : "Nothing due today."}</p>
-      <button class="btn primary" data-back>Pick another category</button>
+      <h1>All caught up</h1>
+      <p class="sub">Nothing in ${where} is due yet.</p>
+      ${spare ? `<button class="btn primary" data-anyway>
+        Practise anyway<span class="mhint">${Math.min(spare, SESSION_MAX)} cards, ignores the schedule</span>
+      </button>` : ""}
+      <button class="btn" data-back>Pick another category</button>
       <button class="btn" data-home>Home</button></div>`);
     bindHome();
+    on("[data-anyway]","click",()=>startPractice(mode, cid, true));
     on("[data-back]","click",()=>pickCategory(mode));
     return;
   }
@@ -380,14 +399,16 @@ function reveal(p, stage){
 
 function finished(){
   const learned = PHRASES.filter(p => progress[p.id] && progress[p.id].box >= 4).length;
+  const where = chosenCat ? esc(CATS[chosenCat]) : "Mixed";
   show(`<div class="done"><div class="big">🎉</div>
-    <h1>Session done</h1>
-    <p class="sub">${session.length} cards · ${learned} phrases learned overall</p>
-    <button class="btn primary" data-again>Another round</button>
+    <h1>${where} done</h1>
+    <p class="sub">${session.length} cards · ${learned} learned, ${
+      PHRASES.filter(p => progress[p.id] && progress[p.id].box < 4).length} still learning</p>
+    <button class="btn primary" data-again>Practise these again</button>
     <button class="btn" data-pick>Different category</button>
     <button class="btn" data-home>Home</button></div>`);
   bindHome();
-  on("[data-again]","click",()=>startPractice(forcedStage, chosenCat));
+  on("[data-again]","click",()=>startPractice(forcedStage, chosenCat, true));
   on("[data-pick]","click",()=>pickCategory(forcedStage));
 }
 
