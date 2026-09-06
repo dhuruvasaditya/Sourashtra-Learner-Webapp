@@ -558,15 +558,6 @@
     "note": ""
   },
   {
-    "id": "0064",
-    "sa": "avo jengen",
-    "en": "come Let's go",
-    "lit": "",
-    "audio": "0064.mp3",
-    "category": "home",
-    "note": ""
-  },
-  {
     "id": "0065",
     "sa": "thumi redy ya",
     "en": "Are you ready?",
@@ -675,15 +666,6 @@
     "note": ""
   },
   {
-    "id": "0077",
-    "sa": "thumi ok ya",
-    "en": "Are you okay? (not how are you doing)",
-    "lit": "",
-    "audio": "0077.mp3",
-    "category": "feelings",
-    "note": ""
-  },
-  {
     "id": "0078",
     "sa": "moga chod lavarani",
     "en": "I'm not feeling well",
@@ -761,15 +743,6 @@
     "en": "When will you come?",
     "lit": "you when come",
     "audio": "0086.mp3",
-    "category": "daily",
-    "note": ""
-  },
-  {
-    "id": "0087",
-    "sa": "thumi musatriya ya",
-    "en": "Have you finished it?",
-    "lit": "you finished ya",
-    "audio": "0087.mp3",
     "category": "daily",
     "note": ""
   },
