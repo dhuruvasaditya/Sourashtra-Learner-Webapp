@@ -102,8 +102,10 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .stats{display:flex;gap:8px;margin:0 0 24px}
 .stat{
   flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
-  padding:12px 8px;text-align:center;
+  padding:12px 8px;text-align:center;font:inherit;color:inherit;cursor:pointer;
 }
+.stat:active{transform:scale(.97)}
+.stat[disabled]{opacity:.45;cursor:default}
 .stat b{display:block;font-size:21px;font-variant-numeric:tabular-nums}
 .stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
 .tiny{color:var(--muted);font-size:13px;text-align:center;margin-top:28px;line-height:1.7}
@@ -158,6 +160,7 @@ function resetProgress(){
 /* ---------- progress -------------------------------------------------- */
 let forcedStage = null;     // set by the practice-mode buttons on the home screen
 let chosenCat  = null;      // null means the mixed session
+let chosenStreak = null;    // set when drilling one "got it" group
 
 const gotCount = p => (progress[p.id] ? progress[p.id].got : 0);
 const started  = p => !!progress[p.id];
@@ -171,10 +174,18 @@ function grade(p, ok){
   saveProgress();
 }
 
-function buildSession(mode, cid){
+function atStreak(p, streak){
+  return streak === "solid" ? gotCount(p) >= SOLID
+                            : started(p) && gotCount(p) === Number(streak);
+}
+const streakLabel = streak => streak === "solid" ? `Got ${SOLID}+` : `Got ${streak}`;
+
+function buildSession(mode, cid, streak){
   let pool = mode === "listen" ? PHRASES.filter(p => p.audio) : PHRASES;
   if (cid) pool = pool.filter(p => p.category === cid);
-  // Weakest first: never-seen and just-missed phrases before ones you know.
+  // Drilling one group: they all sit at the same level, so just shuffle.
+  if (streak) return shuffle(pool.filter(p => atStreak(p, streak))).slice(0, SESSION_MAX);
+  // Otherwise weakest first: never-seen and just-missed before ones you know.
   // Shuffled within each tier so the order still varies run to run.
   const tiers = {};
   for (const item of pool) (tiers[gotCount(item)] ||= []).push(item);
@@ -241,6 +252,7 @@ function home(){
   stopListen();
   forcedStage = null;
   chosenCat = null;
+  chosenStreak = null;
   const fresh = PHRASES.filter(p => !started(p)).length;
   const at = n => PHRASES.filter(p => started(p) && gotCount(p) === n).length;
   const solid = PHRASES.filter(p => gotCount(p) >= SOLID).length;
@@ -249,9 +261,12 @@ function home(){
     <h1>Sourashtra</h1>
     <p class="sub">${PHRASES.length} phrases · ${fresh} not started</p>
     <div class="stats">
-      <div class="stat"><b>${at(1)}</b><span>Got 1</span></div>
-      <div class="stat"><b>${at(2)}</b><span>Got 2</span></div>
-      <div class="stat"><b>${solid}</b><span>Got ${SOLID}+</span></div>
+      <button class="stat" data-streak="1" ${at(1) ? "" : "disabled"}>
+        <b>${at(1)}</b><span>Got 1</span></button>
+      <button class="stat" data-streak="2" ${at(2) ? "" : "disabled"}>
+        <b>${at(2)}</b><span>Got 2</span></button>
+      <button class="stat" data-streak="solid" ${solid ? "" : "disabled"}>
+        <b>${solid}</b><span>Got ${SOLID}+</span></button>
     </div>
     <div class="grouphead">Practice</div>
     <button class="btn primary" data-mode="recall">
@@ -271,6 +286,8 @@ function home(){
       <a href="#" data-reset>Reset everything</a>
     </p>`);
   on("[data-mode]","click",e=>pickCategory(e.currentTarget.dataset.mode));
+  // tapping a tile drills exactly that group, no category step
+  on("[data-streak]","click",e=>startPractice("recall", null, e.currentTarget.dataset.streak));
   on("[data-browse]","click",browse);
   on("[data-listen]","click",listenPicker);
   on("[data-export]","click",e=>{e.preventDefault();exportProgress()});
@@ -312,16 +329,19 @@ function pickCategory(mode){
   on("[data-cat]","click",e=>startPractice(mode, e.currentTarget.dataset.cat || null));
 }
 
-function startPractice(mode, cid){
+function startPractice(mode, cid, streak){
   forcedStage = mode || null;
   chosenCat = cid || null;
-  session = buildSession(mode, cid);
+  chosenStreak = streak || null;
+  session = buildSession(mode, cid, streak);
   idx = 0;
   if (!session.length){
     show(`<div class="done"><div class="big">—</div>
       <h1>Nothing here yet</h1>
-      <p class="sub">${cid ? esc(CATS[cid]) + " has" : "There are"} no phrases with audio.</p>
-      <button class="btn primary" data-back>Pick another category</button>
+      <p class="sub">${streak
+        ? "No phrases at " + esc(streakLabel(streak)) + " any more."
+        : (cid ? esc(CATS[cid]) + " has" : "There are") + " no phrases with audio."}</p>
+      <button class="btn primary" data-back>Pick a category</button>
       <button class="btn" data-home>Home</button></div>`);
     bindHome();
     on("[data-back]","click",()=>pickCategory(mode));
@@ -335,7 +355,8 @@ function card(){
   const p = session[idx];
   const stage = stageFor(p);
   const pct = Math.round(idx / session.length * 100);
-  const head = topbar(pct, `${chosenCat ? CATS[chosenCat] + " · " : ""}${idx+1}/${session.length}`);
+  const scope = chosenStreak ? streakLabel(chosenStreak) : (chosenCat ? CATS[chosenCat] : "");
+  const head = topbar(pct, `${scope ? scope + " · " : ""}${idx+1}/${session.length}`);
   const tag = stage === "listen" ? "Listen" : "Say it";
 
   const body = stage === "listen"
@@ -379,7 +400,8 @@ function reveal(p, stage){
 }
 
 function finished(){
-  const where = chosenCat ? esc(CATS[chosenCat]) : "Mixed";
+  const where = chosenStreak ? esc(streakLabel(chosenStreak))
+              : chosenCat ? esc(CATS[chosenCat]) : "Mixed";
   const pool = chosenCat ? PHRASES.filter(p => p.category === chosenCat) : PHRASES;
   show(`<div class="done"><div class="big">🎉</div>
     <h1>${where} done</h1>
@@ -389,7 +411,7 @@ function finished(){
     <button class="btn" data-pick>Different category</button>
     <button class="btn" data-home>Home</button></div>`);
   bindHome();
-  on("[data-again]","click",()=>startPractice(forcedStage, chosenCat));
+  on("[data-again]","click",()=>startPractice(forcedStage, chosenCat, chosenStreak));
   on("[data-pick]","click",()=>pickCategory(forcedStage));
 }
 

@@ -46,6 +46,10 @@ phrases sit at each level:
 Got 1    Got 2    Got 3+
 ```
 
+Those tiles are buttons. Tap one and it starts an **English → Sourashtra**
+session on exactly that group, in random order — handy for hammering the
+phrases you keep losing. A tile with nothing in it is greyed out.
+
 There are no review dates and nothing is ever locked until tomorrow — practise
 whatever you want, whenever you want. Sessions put your weakest phrases first:
 never-seen and just-missed ones come up before the ones you already know.
