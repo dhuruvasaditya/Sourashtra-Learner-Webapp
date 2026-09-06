@@ -4,7 +4,7 @@
     "sa": "illa kaya?",
     "en": "What is this?",
     "lit": "this what?",
-    "audio": null,
+    "audio": "0001.mp3",
     "category": "basics",
     "note": ""
   },
@@ -13,7 +13,7 @@
     "sa": "enu konu?",
     "en": "Who is that?",
     "lit": "that who?",
-    "audio": null,
+    "audio": "0002.mp3",
     "category": "basics",
     "note": ""
   },
@@ -22,7 +22,7 @@
     "sa": "thumi kaithiryaya?",
     "en": "Have you eaten?",
     "lit": "you eaten-Q",
-    "audio": null,
+    "audio": "0003.mp3",
     "category": "food",
     "note": "Used constantly as a general greeting, like 'how are you'."
   },
@@ -31,7 +31,7 @@
     "sa": "me sowriyam",
     "en": "I'm doing good",
     "lit": "I well",
-    "audio": null,
+    "audio": "0005.mp3",
     "category": "greetings",
     "note": ""
   },
@@ -40,7 +40,7 @@
     "sa": "sourashtra kalaaiya?",
     "en": "Do you know Saurashtra?",
     "lit": "Saurashtra know-Q",
-    "audio": null,
+    "audio": "0006.mp3",
     "category": "learning",
     "note": ""
   },
@@ -49,7 +49,7 @@
     "sa": "kalaaiya?",
     "en": "Do you know?",
     "lit": "know-Q",
-    "audio": null,
+    "audio": "0007.mp3",
     "category": "learning",
     "note": ""
   },
@@ -58,7 +58,7 @@
     "sa": "uva uva kalaai",
     "en": "I know a little",
     "lit": "little little know",
-    "audio": null,
+    "audio": "0008.mp3",
     "category": "learning",
     "note": "Reduplication 'uva uva' softens it to 'just a little bit'."
   },
@@ -67,7 +67,7 @@
     "sa": "hallu sikila setha",
     "en": "I'm learning slowly",
     "lit": "slowly learning am",
-    "audio": null,
+    "audio": "0009.mp3",
     "category": "learning",
     "note": ""
   },
@@ -76,7 +76,7 @@
     "sa": "thunga bhook keraras ya?",
     "en": "Are you hungry?",
     "lit": "to-you hunger doing-Q",
-    "audio": null,
+    "audio": "0010.mp3",
     "category": "food",
     "note": ""
   },
@@ -85,7 +85,7 @@
     "sa": "katha bisuvo",
     "en": "Come sit and eat",
     "lit": "eat sit",
-    "audio": null,
+    "audio": "0011.mp3",
     "category": "food",
     "note": ""
   },
@@ -94,7 +94,7 @@
     "sa": "thunga pajeya?",
     "en": "Do you want some?",
     "lit": "to-you want-Q",
-    "audio": null,
+    "audio": "0012.mp3",
     "category": "food",
     "note": ""
   },
@@ -103,7 +103,7 @@
     "sa": "angum uva dhevuya?",
     "en": "Shall I give a little more?",
     "lit": "more little give-Q",
-    "audio": null,
+    "audio": "0013.mp3",
     "category": "food",
     "note": ""
   },
@@ -112,7 +112,7 @@
     "sa": "kai heyo?",
     "en": "What happened?",
     "lit": "what happened",
-    "audio": null,
+    "audio": "0014.mp3",
     "category": "daily",
     "note": ""
   },
@@ -121,7 +121,7 @@
     "sa": "thumi kai keraryo?",
     "en": "What are you doing?",
     "lit": "you what doing",
-    "audio": null,
+    "audio": "0015.mp3",
     "category": "daily",
     "note": ""
   },
@@ -924,6 +924,69 @@
     "lit": "",
     "audio": "0104.mp3",
     "category": "people",
+    "note": ""
+  },
+  {
+    "id": "0105",
+    "sa": "me avaryo",
+    "en": "I'm coming",
+    "lit": "",
+    "audio": "0105.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0106",
+    "sa": "avo jengen",
+    "en": "Let us go",
+    "lit": "",
+    "audio": "0106.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0107",
+    "sa": "thumi chokad injiyas ya",
+    "en": "Did you sleep well?",
+    "lit": "you good slept ya",
+    "audio": "0107.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0108",
+    "sa": "thumi khod thoveyo",
+    "en": "Where did you keep it?",
+    "lit": "you where kept",
+    "audio": "0108.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0109",
+    "sa": "thumi ok ya",
+    "en": "Are you okay?",
+    "lit": "",
+    "audio": "0109.mp3",
+    "category": "feelings",
+    "note": "Not to be used like how are you doing are you doing fine this feel is different"
+  },
+  {
+    "id": "0110",
+    "sa": "thumi musatriya ya",
+    "en": "Have you finished?",
+    "lit": "",
+    "audio": "0110.mp3",
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0111",
+    "sa": "avo bharad jengen",
+    "en": "Let's go out",
+    "lit": "",
+    "audio": "0111.mp3",
+    "category": "daily",
     "note": ""
   }
 ]
