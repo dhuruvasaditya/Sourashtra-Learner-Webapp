@@ -24,30 +24,34 @@ mixed. A session is about 20 cards, and the app tracks which ones are due.
 
 The category step matters: drilling *Food* before a family dinner beats a random
 mix of everything. Each category shows how far through it you are — `4/17 done`
-— plus how many are due.
+— and how many you have got right three times or more.
 
-Spaced repetition means a category you just finished will not be due again for a
-couple of days. When that happens the app offers **Practise anyway**, which
-ignores the schedule and runs the category regardless — the same as **Practise
-these again** at the end of a session.
+**Practise these again** at the end of a session repeats the same category
+straight away.
 
 Reveal shows the transliteration, the English, the gloss, any usage note, and
 plays the recording. Then grade yourself: **Again** or **Got it**. Saying the
 phrase *before* revealing is the part that makes it stick — recognising an answer
 feels like learning and isn't.
 
-### Scheduling
+### Progress
 
-Cards move through Leitner boxes. **Got it** pushes the next review further out;
-**Again** drops it back to today and shows it again before the session ends.
+Each phrase counts how many times you have got it right **in a row**. Answer
+**Got it** and the count goes up; answer **Again** and it drops to zero. Three in
+a row is the bar for knowing something, so the home screen shows how many
+phrases sit at each level:
 
-| Box | Next review |
-|---|---|
-| 1 | today |
-| 2 | in 2 days |
-| 3 | in 5 days |
-| 4 | in 12 days |
-| 5 | in 30 days |
+```
+  8        5        10
+Got 1    Got 2    Got 3+
+```
+
+There are no review dates and nothing is ever locked until tomorrow — practise
+whatever you want, whenever you want. Sessions put your weakest phrases first:
+never-seen and just-missed ones come up before the ones you already know.
+
+**Reset everything** on the home screen clears all counts on that device and
+starts over. Phrases and recordings are untouched.
 
 ### Browse
 
@@ -61,23 +65,6 @@ Pick a category and it plays through it — phrase, pause to repeat, next — wh
 you read along. For dishes, driving, walking.
 
 ### Progress
-
-The home screen shows **Due now** (ready for review today), **Learning** (started,
-not yet mastered) and **Learned**. The small line above them — `107 phrases ·
-84 not started` — is the rest: phrases you have never been shown.
-
-A phrase becomes **Learned** on the third consecutive **Got it**, which on the
-natural schedule lands about a week after you first see it:
-
-| | Box | Next review |
-|---|---|---|
-| 1st Got it | 2 | in 2 days |
-| 2nd Got it | 3 | in 5 days |
-| 3rd Got it | **4 — Learned** | in 12 days |
-| 4th Got it | 5 | in 30 days |
-
-A single **Again** drops it back to box 1 and it has to climb again, so that
-number moves slowly on purpose.
 
 Progress is kept in the browser under `saurashtra.progress.v1`. It survives
 reloads and app restarts, but it is **per device** — clearing Safari data or moving to a new phone

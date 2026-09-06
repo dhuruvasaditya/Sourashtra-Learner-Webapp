@@ -123,71 +123,64 @@ textarea{
 "use strict";
 
 /* ---------- constants ------------------------------------------------- */
-const STORE   = "saurashtra.progress.v1";
-const BOX_DAYS = {1:0, 2:2, 3:5, 4:12, 5:30};   // Leitner intervals
-const NEW_PER_SESSION = 5, REVIEW_PER_SESSION = 15;
+const STORE = "saurashtra.progress.v1";
+const SESSION_MAX = 20;
+const SOLID = 3;            // "got it" this many times in a row = solid
 
 let PHRASES = [];
 let CATS = {};              // id -> label, ordered
-let progress = {};
+let progress = {};          // id -> {got: n}   n = correct answers in a row
 
 /* ---------- storage --------------------------------------------------- */
 function loadProgress(){
   try { progress = JSON.parse(localStorage.getItem(STORE)) || {}; }
   catch(e){ progress = {}; }
+  // Older versions stored Leitner boxes and due dates. Carry that work over
+  // rather than resetting anyone: box 1 meant "seen but wrong", box 5 "known".
+  let migrated = false;
+  for (const [id, v] of Object.entries(progress)){
+    if (v && typeof v.got !== "number"){
+      progress[id] = {got: Math.max(0, (v.box || 1) - 1)};
+      migrated = true;
+    }
+  }
+  if (migrated) saveProgress();
 }
 function saveProgress(){
   try { localStorage.setItem(STORE, JSON.stringify(progress)); }
   catch(e){ /* private mode — session still works, just won't persist */ }
 }
-function today(off){
-  const d = new Date();
-  if (off) d.setDate(d.getDate() + off);
-  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0")
-         + "-" + String(d.getDate()).padStart(2,"0");
+function resetProgress(){
+  progress = {};
+  try { localStorage.removeItem(STORE); } catch(e){}
 }
 
-/* ---------- scheduling ------------------------------------------------ */
-let forcedStage = null;      // set by the practice-mode buttons on the home screen
+/* ---------- progress -------------------------------------------------- */
+let forcedStage = null;     // set by the practice-mode buttons on the home screen
 let chosenCat  = null;      // null means the mixed session
 
+const gotCount = p => (progress[p.id] ? progress[p.id].got : 0);
+const started  = p => !!progress[p.id];
+
 function stageFor(p){
-  if (forcedStage){
-    // a phrase with no recording cannot be guessed from audio
-    return (forcedStage === "listen" && !p.audio) ? "recall" : forcedStage;
-  }
-  const st = progress[p.id];
-  const box = st ? st.box : 1;
-  let stage = box >= 2 ? "recall" : "listen";
-  if (stage === "listen" && !p.audio) stage = "recall";   // nothing to play yet
-  return stage;
+  // A phrase with no recording cannot be guessed from audio.
+  return (forcedStage === "listen" && p.audio) ? "listen" : "recall";
 }
 function grade(p, ok){
-  const st = progress[p.id] || {box:1};
-  const box = ok ? Math.min(st.box + 1, 5) : 1;
-  progress[p.id] = {box, due: today(BOX_DAYS[box]), seen: (st.seen||0) + 1};
+  progress[p.id] = {got: ok ? gotCount(p) + 1 : 0};
   saveProgress();
 }
-function dueList(){
-  const t = today();
-  return PHRASES.filter(p => progress[p.id] && progress[p.id].due <= t);
-}
-function newList(){ return PHRASES.filter(p => !progress[p.id]); }
 
-const SESSION_MAX = NEW_PER_SESSION + REVIEW_PER_SESSION;
-
-function buildSession(mode, cid, anyway){
-  // Listen mode can only use phrases that actually have a recording.
+function buildSession(mode, cid){
   let pool = mode === "listen" ? PHRASES.filter(p => p.audio) : PHRASES;
   if (cid) pool = pool.filter(p => p.category === cid);
-  // "Practise anyway" ignores the schedule — you asked for these cards.
-  if (anyway) return shuffle(pool).slice(0, SESSION_MAX);
-  const t = today();
-  const due = shuffle(pool.filter(p => progress[p.id] && progress[p.id].due <= t))
-                .slice(0, REVIEW_PER_SESSION);
-  const fresh = pool.filter(p => !progress[p.id]);
-  const room = NEW_PER_SESSION + Math.max(0, REVIEW_PER_SESSION - due.length);
-  return shuffle(due.concat(fresh.slice(0, room)));
+  // Weakest first: never-seen and just-missed phrases before ones you know.
+  // Shuffled within each tier so the order still varies run to run.
+  const tiers = {};
+  for (const item of pool) (tiers[gotCount(item)] ||= []).push(item);
+  return Object.keys(tiers).sort((a,b) => a - b)
+    .flatMap(k => shuffle(tiers[k]))
+    .slice(0, SESSION_MAX);
 }
 function shuffle(a){
   a = a.slice();
@@ -248,19 +241,17 @@ function home(){
   stopListen();
   forcedStage = null;
   chosenCat = null;
-  const due = dueList().length, fresh = newList().length;
-  const learning = PHRASES.filter(p => progress[p.id] && progress[p.id].box < 4).length;
-  const learned  = PHRASES.filter(p => progress[p.id] && progress[p.id].box >= 4).length;
+  const fresh = PHRASES.filter(p => !started(p)).length;
+  const at = n => PHRASES.filter(p => started(p) && gotCount(p) === n).length;
+  const solid = PHRASES.filter(p => gotCount(p) >= SOLID).length;
   const withAudio = PHRASES.filter(p => p.audio).length;
-  const nextDue = Object.values(progress).map(v => v.due).sort()[0];
   show(`
     <h1>Sourashtra</h1>
-    <p class="sub">${PHRASES.length} phrases · ${fresh} not started${
-      !due && nextDue && nextDue > today() ? ` · next review ${esc(nextDue)}` : ""}</p>
+    <p class="sub">${PHRASES.length} phrases · ${fresh} not started</p>
     <div class="stats">
-      <div class="stat"><b>${due}</b><span>Due now</span></div>
-      <div class="stat"><b>${learning}</b><span>Learning</span></div>
-      <div class="stat"><b>${learned}</b><span>Learned</span></div>
+      <div class="stat"><b>${at(1)}</b><span>Got 1</span></div>
+      <div class="stat"><b>${at(2)}</b><span>Got 2</span></div>
+      <div class="stat"><b>${solid}</b><span>Got ${SOLID}+</span></div>
     </div>
     <div class="grouphead">Practice</div>
     <button class="btn primary" data-mode="recall">
@@ -276,13 +267,15 @@ function home(){
     <button class="btn" data-listen>Listen hands-free</button>
     <p class="tiny">
       <a href="#" data-export>Export progress</a> ·
-      <a href="#" data-import>Import</a>
+      <a href="#" data-import>Import</a> ·
+      <a href="#" data-reset>Reset everything</a>
     </p>`);
   on("[data-mode]","click",e=>pickCategory(e.currentTarget.dataset.mode));
   on("[data-browse]","click",browse);
   on("[data-listen]","click",listenPicker);
   on("[data-export]","click",e=>{e.preventDefault();exportProgress()});
   on("[data-import]","click",e=>{e.preventDefault();importProgress()});
+  on("[data-reset]","click",e=>{e.preventDefault();confirmReset()});
 }
 
 /* ---------- practice -------------------------------------------------- */
@@ -294,26 +287,24 @@ const MODE_NAME = {recall: "English → Sourashtra", listen: "Sourashtra → Eng
    makes it impossible to drill the one category you actually need today. */
 function pickCategory(mode){
   const pool = mode === "listen" ? PHRASES.filter(p => p.audio) : PHRASES;
-  const t = today();
-  const dueIn = rows => rows.filter(p => progress[p.id] && progress[p.id].due <= t).length;
 
   let html = `<div class="topbar"><button class="back" data-home>‹ Home</button></div>
     <h1>${esc(MODE_NAME[mode])}</h1>
     <p class="sub">What do you want to practise?</p>
     <button class="btn primary" data-cat="">
       Everything, mixed
-      <span class="mhint">${pool.filter(p => progress[p.id]).length}/${pool.length} done${
-        dueIn(pool) ? ` · ${dueIn(pool)} due` : ""}</span>
+      <span class="mhint">${pool.filter(started).length}/${pool.length} done · ${
+        pool.filter(p => gotCount(p) >= SOLID).length} got ${SOLID}+</span>
     </button>
     <div class="grouphead">Or one category</div>`;
 
   for (const cid of Object.keys(CATS)){
     const rows = pool.filter(p => p.category === cid);
     if (!rows.length) continue;
-    const due = dueIn(rows);
-    const done = rows.filter(p => progress[p.id]).length;
+    const done = rows.filter(started).length;
+    const firm = rows.filter(p => gotCount(p) >= SOLID).length;
     html += `<button class="btn" data-cat="${cid}">${esc(CATS[cid])}
-      <span class="mhint">${done}/${rows.length} done${due ? ` · ${due} due` : ""}</span>
+      <span class="mhint">${done}/${rows.length} done${firm ? ` · ${firm} got ${SOLID}+` : ""}</span>
     </button>`;
   }
   show(html);
@@ -321,26 +312,18 @@ function pickCategory(mode){
   on("[data-cat]","click",e=>startPractice(mode, e.currentTarget.dataset.cat || null));
 }
 
-function startPractice(mode, cid, anyway){
+function startPractice(mode, cid){
   forcedStage = mode || null;
   chosenCat = cid || null;
-  session = buildSession(mode, cid, anyway);
+  session = buildSession(mode, cid);
   idx = 0;
   if (!session.length){
-    // Nothing is due, but the cards still exist — offer them anyway rather
-    // than dead-ending someone who simply wants to practise.
-    const spare = buildSession(mode, cid, true).length;
-    const where = cid ? esc(CATS[cid]) : "everything";
-    show(`<div class="done"><div class="big">✓</div>
-      <h1>All caught up</h1>
-      <p class="sub">Nothing in ${where} is due yet.</p>
-      ${spare ? `<button class="btn primary" data-anyway>
-        Practise anyway<span class="mhint">${Math.min(spare, SESSION_MAX)} cards, ignores the schedule</span>
-      </button>` : ""}
-      <button class="btn" data-back>Pick another category</button>
+    show(`<div class="done"><div class="big">—</div>
+      <h1>Nothing here yet</h1>
+      <p class="sub">${cid ? esc(CATS[cid]) + " has" : "There are"} no phrases with audio.</p>
+      <button class="btn primary" data-back>Pick another category</button>
       <button class="btn" data-home>Home</button></div>`);
     bindHome();
-    on("[data-anyway]","click",()=>startPractice(mode, cid, true));
     on("[data-back]","click",()=>pickCategory(mode));
     return;
   }
@@ -396,17 +379,17 @@ function reveal(p, stage){
 }
 
 function finished(){
-  const learned = PHRASES.filter(p => progress[p.id] && progress[p.id].box >= 4).length;
   const where = chosenCat ? esc(CATS[chosenCat]) : "Mixed";
+  const pool = chosenCat ? PHRASES.filter(p => p.category === chosenCat) : PHRASES;
   show(`<div class="done"><div class="big">🎉</div>
     <h1>${where} done</h1>
-    <p class="sub">${session.length} cards · ${learned} learned, ${
-      PHRASES.filter(p => progress[p.id] && progress[p.id].box < 4).length} still learning</p>
+    <p class="sub">${session.length} cards · ${pool.filter(p => gotCount(p) >= SOLID).length}
+      of ${pool.length} now at ${SOLID}+ in a row</p>
     <button class="btn primary" data-again>Practise these again</button>
     <button class="btn" data-pick>Different category</button>
     <button class="btn" data-home>Home</button></div>`);
   bindHome();
-  on("[data-again]","click",()=>startPractice(forcedStage, chosenCat, true));
+  on("[data-again]","click",()=>startPractice(forcedStage, chosenCat));
   on("[data-pick]","click",()=>pickCategory(forcedStage));
 }
 
@@ -422,7 +405,7 @@ function browse(){
       if (!rows.length) continue;
       html += `<div class="grouphead">${esc(CATS[cid])}</div>`;
       for (const p of rows){
-        const box = progress[p.id] ? progress[p.id].box : 0;
+        const box = Math.min(gotCount(p) + (started(p) ? 1 : 0), 5);
         html += `<button class="item" data-id="${p.id}">
           <span class="dot b${box}"></span>
           <span class="txt">
@@ -516,6 +499,20 @@ function exportProgress(){
     catch(err){ e.target.textContent = "Select the text and copy it"; }
   });
 }
+function confirmReset(){
+  const n = Object.keys(progress).length;
+  show(`<div class="topbar"><button class="back" data-home>‹ Home</button></div>
+    <h1>Reset everything</h1>
+    <p class="sub">This clears every "got it" count on this device and starts
+      all ${PHRASES.length} phrases from scratch. The phrases and recordings stay.
+      It cannot be undone.</p>
+    ${n ? `<button class="btn again" data-go>Reset ${n} phrases</button>`
+        : `<p class="empty">Nothing to reset — no progress yet.</p>`}
+    <button class="btn" data-home>Cancel</button>`);
+  bindHome();
+  on("[data-go]","click",()=>{ resetProgress(); home(); });
+}
+
 function importProgress(){
   show(`<div class="topbar"><button class="back" data-home>‹ Home</button></div>
     <h1>Import</h1>
