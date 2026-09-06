@@ -20,13 +20,13 @@ data/
   phrases.json      # the dataset (single source of truth)
   prompts.json      # recording queue: English prompts by category
 record.py           # Tkinter collection tool (Mac)
-web/
+docs/
   index.html        # the entire app — one file, vanilla JS, no build step
   phrases.json      # copy of data/phrases.json, written by record.py
   audio/0001.mp3 ...
 ```
 
-Hosting: GitHub Pages, serving `web/`. Add to Home Screen on iPhone.
+Hosting: GitHub Pages, serving `docs/`. Add to Home Screen on iPhone.
 
 ## Data schema
 
@@ -50,7 +50,7 @@ Hosting: GitHub Pages, serving `web/`. Add to Home Screen on iPhone.
 | `sa` | Saurashtra in Latin transliteration. The primary display text. |
 | `en` | Natural English meaning — not a literal translation. |
 | `lit` | Word-by-word gloss. Costs seconds to write, and it is what lets the learner start decomposing phrases instead of memorizing opaque blobs. Empty string if unclear. |
-| `audio` | Filename in `web/audio/`. `null` until recorded. |
+| `audio` | Filename in `docs/audio/`. `null` until recorded. |
 | `category` | One of the ids in `prompts.json`. |
 | `note` | Usage hint from the speaker. Optional, often the most valuable field. |
 
@@ -137,8 +137,8 @@ next?" is what kills a recording session at item 15. With a queue, 30 items in
 20 minutes is realistic.
 
 - Audio: capture WAV via `sounddevice`, convert to **mp3** with `ffmpeg`
-  (iOS Safari is picky). Save as `web/audio/<id>.mp3`.
+  (iOS Safari is picky). Save as `docs/audio/<id>.mp3`.
 - Buttons: Record / Stop / Play / Save & Next / Skip.
-- Save appends to `data/phrases.json` and copies it to `web/phrases.json`.
+- Save appends to `data/phrases.json` and copies it to `docs/phrases.json`.
 - Show a progress counter: `food — 7 / 18`.
 - Allow re-recording an existing id (fix a bad take without re-typing text).

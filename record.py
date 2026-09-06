@@ -4,8 +4,8 @@ Run with:  uv run record.py   (see README.md for setup)
 
 Walks the recording queue in data/prompts.json, skipping prompts already
 present in data/phrases.json. For each prompt: record audio, type the
-transliteration, save. Writes web/audio/<id>.mp3 and appends to
-data/phrases.json (mirrored to web/phrases.json).
+transliteration, save. Writes docs/audio/<id>.mp3 and appends to
+data/phrases.json (mirrored to docs/phrases.json).
 """
 
 from __future__ import annotations
@@ -25,12 +25,13 @@ import soundfile as sf
 
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
-WEB_DIR = ROOT / "web"
-AUDIO_DIR = WEB_DIR / "audio"
+# GitHub Pages will only serve the repo root or /docs, hence the name.
+SITE_DIR = ROOT / "docs"
+AUDIO_DIR = SITE_DIR / "audio"
 PHRASES_PATH = DATA_DIR / "phrases.json"
 PROMPTS_PATH = DATA_DIR / "prompts.json"
 SKIPPED_PATH = DATA_DIR / "skipped.json"
-WEB_PHRASES_PATH = WEB_DIR / "phrases.json"
+SITE_PHRASES_PATH = SITE_DIR / "phrases.json"
 
 SAMPLE_RATE = 44100
 CHANNELS = 1
@@ -70,11 +71,11 @@ def load_json(path: Path):
 
 
 def save_phrases(phrases: list[dict]) -> None:
-    """Write the dataset and mirror it into web/ for the app to fetch."""
+    """Write the dataset and mirror it into docs/ for the app to fetch."""
     payload = json.dumps(phrases, ensure_ascii=False, indent=2) + "\n"
     PHRASES_PATH.write_text(payload, encoding="utf-8")
-    WEB_DIR.mkdir(exist_ok=True)
-    WEB_PHRASES_PATH.write_text(payload, encoding="utf-8")
+    SITE_DIR.mkdir(exist_ok=True)
+    SITE_PHRASES_PATH.write_text(payload, encoding="utf-8")
 
 
 def next_id(phrases: list[dict]) -> str:
