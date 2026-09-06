@@ -149,6 +149,7 @@ function today(off){
 
 /* ---------- scheduling ------------------------------------------------ */
 let forcedStage = null;      // set by the practice-mode buttons on the home screen
+let chosenCat  = null;      // null means the mixed session
 
 function stageFor(p){
   if (forcedStage){
@@ -173,9 +174,10 @@ function dueList(){
 }
 function newList(){ return PHRASES.filter(p => !progress[p.id]); }
 
-function buildSession(mode){
+function buildSession(mode, cid){
   // Listen mode can only use phrases that actually have a recording.
-  const pool = mode === "listen" ? PHRASES.filter(p => p.audio) : PHRASES;
+  let pool = mode === "listen" ? PHRASES.filter(p => p.audio) : PHRASES;
+  if (cid) pool = pool.filter(p => p.category === cid);
   const t = today();
   const due = shuffle(pool.filter(p => progress[p.id] && progress[p.id].due <= t))
                 .slice(0, REVIEW_PER_SESSION);
@@ -241,6 +243,7 @@ function bindHome(){ on("[data-home]","click",home); }
 function home(){
   stopListen();
   forcedStage = null;
+  chosenCat = null;
   const due = dueList().length, fresh = newList().length;
   const learned = PHRASES.filter(p => progress[p.id] && progress[p.id].box >= 4).length;
   const withAudio = PHRASES.filter(p => p.audio).length;
@@ -253,13 +256,13 @@ function home(){
       <div class="stat"><b>${learned}</b><span>Learned</span></div>
     </div>
     <div class="grouphead">Practice</div>
-    <button class="btn primary" data-mode="listen">
-      Hear it → guess the meaning
-      <span class="mhint">${withAudio} with audio</span>
-    </button>
-    <button class="btn" data-mode="recall">
+    <button class="btn primary" data-mode="recall">
       See English → say it
       <span class="mhint">then hear the answer</span>
+    </button>
+    <button class="btn" data-mode="listen">
+      Hear it → guess the meaning
+      <span class="mhint">${withAudio} with audio</span>
     </button>
     <div class="grouphead">Reference</div>
     <button class="btn" data-browse>Browse</button>
@@ -268,7 +271,7 @@ function home(){
       <a href="#" data-export>Export progress</a> ·
       <a href="#" data-import>Import</a>
     </p>`);
-  on("[data-mode]","click",e=>startPractice(e.currentTarget.dataset.mode));
+  on("[data-mode]","click",e=>pickCategory(e.currentTarget.dataset.mode));
   on("[data-browse]","click",browse);
   on("[data-listen]","click",listenPicker);
   on("[data-export]","click",e=>{e.preventDefault();exportProgress()});
@@ -278,18 +281,51 @@ function home(){
 /* ---------- practice -------------------------------------------------- */
 let session = [], idx = 0;
 
-function startPractice(mode){
+const MODE_NAME = {recall: "See English → say it", listen: "Hear it → guess the meaning"};
+
+/* Choose what to practise before starting. Going straight into a mixed session
+   makes it impossible to drill the one category you actually need today. */
+function pickCategory(mode){
+  const pool = mode === "listen" ? PHRASES.filter(p => p.audio) : PHRASES;
+  const t = today();
+  const dueIn = rows => rows.filter(p => progress[p.id] && progress[p.id].due <= t).length;
+
+  let html = `<div class="topbar"><button class="back" data-home>‹ Home</button></div>
+    <h1>${esc(MODE_NAME[mode])}</h1>
+    <p class="sub">What do you want to practise?</p>
+    <button class="btn primary" data-cat="">
+      Everything, mixed
+      <span class="mhint">${pool.length} phrases · ${dueIn(pool)} due</span>
+    </button>
+    <div class="grouphead">Or one category</div>`;
+
+  for (const cid of Object.keys(CATS)){
+    const rows = pool.filter(p => p.category === cid);
+    if (!rows.length) continue;
+    const due = dueIn(rows);
+    html += `<button class="btn" data-cat="${cid}">${esc(CATS[cid])}
+      <span class="mhint">${rows.length} phrases${due ? ` · ${due} due` : ""}</span>
+    </button>`;
+  }
+  show(html);
+  bindHome();
+  on("[data-cat]","click",e=>startPractice(mode, e.currentTarget.dataset.cat || null));
+}
+
+function startPractice(mode, cid){
   forcedStage = mode || null;
-  session = buildSession(mode);
+  chosenCat = cid || null;
+  session = buildSession(mode, cid);
   idx = 0;
   if (!session.length){
     show(`<div class="done"><div class="big">✓</div>
       <h1>Nothing to practise</h1>
-      <p class="sub">${mode === "listen"
-        ? "No phrases with audio are due yet."
-        : "Nothing due today."}</p>
+      <p class="sub">${cid ? "Nothing left in " + esc(CATS[cid]) + "." : "Nothing due today."}</p>
+      <button class="btn primary" data-back>Pick another category</button>
       <button class="btn" data-home>Home</button></div>`);
-    return bindHome();
+    bindHome();
+    on("[data-back]","click",()=>pickCategory(mode));
+    return;
   }
   card();
 }
@@ -299,7 +335,7 @@ function card(){
   const p = session[idx];
   const stage = stageFor(p);
   const pct = Math.round(idx / session.length * 100);
-  const head = topbar(pct, `${idx+1}/${session.length}`);
+  const head = topbar(pct, `${chosenCat ? CATS[chosenCat] + " · " : ""}${idx+1}/${session.length}`);
   const tag = stage === "listen" ? "Listen" : "Say it";
 
   const body = stage === "listen"
@@ -348,9 +384,11 @@ function finished(){
     <h1>Session done</h1>
     <p class="sub">${session.length} cards · ${learned} phrases learned overall</p>
     <button class="btn primary" data-again>Another round</button>
+    <button class="btn" data-pick>Different category</button>
     <button class="btn" data-home>Home</button></div>`);
   bindHome();
-  on("[data-again]","click",()=>startPractice(forcedStage));
+  on("[data-again]","click",()=>startPractice(forcedStage, chosenCat));
+  on("[data-pick]","click",()=>pickCategory(forcedStage));
 }
 
 /* ---------- browse ---------------------------------------------------- */

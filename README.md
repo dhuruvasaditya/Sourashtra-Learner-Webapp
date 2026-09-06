@@ -14,13 +14,18 @@ icon and opens fullscreen, like an app. No install, no account, no App Store.
 
 ### Practice
 
-Two modes, picked from the home screen. Either way you get a session of about
-20 cards, and the app tracks which ones are due.
+Pick a mode, then pick what to practise — a single category, or everything
+mixed. A session is about 20 cards, and the app tracks which ones are due.
 
 | Mode | You see | You do |
 |---|---|---|
-| **Hear it → guess the meaning** | audio plays | work out what it means, tap Reveal |
 | **See English → say it** | the English | say it aloud in Sourashtra, tap Reveal |
+| **Hear it → guess the meaning** | audio plays | work out what it means, tap Reveal |
+
+The category step matters: drilling *Food* before a family dinner beats a random
+mix of everything. Each category shows how many phrases it holds and how many
+are due. At the end of a session you can go another round, switch category, or
+go home.
 
 Reveal shows the transliteration, the English, the gloss, any usage note, and
 plays the recording. Then grade yourself: **Again** or **Got it**. Saying the
