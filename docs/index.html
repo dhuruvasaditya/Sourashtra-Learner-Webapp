@@ -44,6 +44,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
   margin-bottom:10px;box-shadow:var(--shadow);
 }
 .btn:active{transform:scale(.985)}
+.btn .mhint{display:block;font-size:13px;font-weight:400;opacity:.7;margin-top:3px}
 .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:transparent;font-weight:600}
 .btn.good{background:var(--good);color:#fff;border-color:transparent;font-weight:600}
 .btn.again{background:transparent;color:var(--again);border-color:currentColor}
@@ -154,7 +155,13 @@ function today(off){
 }
 
 /* ---------- scheduling ------------------------------------------------ */
+let forcedStage = null;      // set by the practice-mode buttons on the home screen
+
 function stageFor(p){
+  if (forcedStage){
+    // a phrase with no recording cannot be guessed from audio
+    return (forcedStage === "listen" && !p.audio) ? "recall" : forcedStage;
+  }
   const st = progress[p.id];
   const box = st ? st.box : 1;
   let stage = box >= 4 ? "produce" : box >= 2 ? "recall" : "listen";
@@ -173,9 +180,13 @@ function dueList(){
 }
 function newList(){ return PHRASES.filter(p => !progress[p.id]); }
 
-function buildSession(){
-  const due = shuffle(dueList()).slice(0, REVIEW_PER_SESSION);
-  const fresh = newList();
+function buildSession(mode){
+  // Listen mode can only use phrases that actually have a recording.
+  const pool = mode === "listen" ? PHRASES.filter(p => p.audio) : PHRASES;
+  const t = today();
+  const due = shuffle(pool.filter(p => progress[p.id] && progress[p.id].due <= t))
+                .slice(0, REVIEW_PER_SESSION);
+  const fresh = pool.filter(p => !progress[p.id]);
   const room = NEW_PER_SESSION + Math.max(0, REVIEW_PER_SESSION - due.length);
   return shuffle(due.concat(fresh.slice(0, room)));
 }
@@ -236,9 +247,10 @@ function bindHome(){ on("[data-home]","click",home); }
 /* ---------- home ------------------------------------------------------ */
 function home(){
   stopListen();
+  forcedStage = null;
   const due = dueList().length, fresh = newList().length;
   const learned = PHRASES.filter(p => progress[p.id] && progress[p.id].box >= 4).length;
-  const ready = due + Math.min(fresh, NEW_PER_SESSION);
+  const withAudio = PHRASES.filter(p => p.audio).length;
   show(`
     <h1>Saurashtra</h1>
     <p class="sub">${PHRASES.length} phrases</p>
@@ -247,16 +259,27 @@ function home(){
       <div class="stat"><b>${fresh}</b><span>New</span></div>
       <div class="stat"><b>${learned}</b><span>Learned</span></div>
     </div>
-    <button class="btn primary" data-practice>
-      ${ready ? "Practice today" : "Nothing due — practice anyway"}
+    <div class="grouphead">Practice</div>
+    <button class="btn primary" data-mode="listen">
+      Hear it → guess the meaning
+      <span class="mhint">${withAudio} with audio</span>
     </button>
+    <button class="btn" data-mode="recall">
+      See English → say it
+      <span class="mhint">then hear the answer</span>
+    </button>
+    <button class="btn" data-mode="produce">
+      See English → type it
+      <span class="mhint">hardest, checks your spelling</span>
+    </button>
+    <div class="grouphead">Reference</div>
     <button class="btn" data-browse>Browse</button>
-    <button class="btn" data-listen>Listen</button>
+    <button class="btn" data-listen>Listen hands-free</button>
     <p class="tiny">
       <a href="#" data-export>Export progress</a> ·
       <a href="#" data-import>Import</a>
     </p>`);
-  on("[data-practice]","click",startPractice);
+  on("[data-mode]","click",e=>startPractice(e.currentTarget.dataset.mode));
   on("[data-browse]","click",browse);
   on("[data-listen]","click",listenPicker);
   on("[data-export]","click",e=>{e.preventDefault();exportProgress()});
@@ -266,12 +289,16 @@ function home(){
 /* ---------- practice -------------------------------------------------- */
 let session = [], idx = 0;
 
-function startPractice(){
-  session = buildSession();
+function startPractice(mode){
+  forcedStage = mode || null;
+  session = buildSession(mode);
   idx = 0;
   if (!session.length){
     show(`<div class="done"><div class="big">✓</div>
-      <h1>All caught up</h1><p class="sub">Nothing due today.</p>
+      <h1>Nothing to practise</h1>
+      <p class="sub">${mode === "listen"
+        ? "No phrases with audio are due yet."
+        : "Nothing due today."}</p>
       <button class="btn" data-home>Home</button></div>`);
     return bindHome();
   }
@@ -355,7 +382,7 @@ function finished(){
     <button class="btn primary" data-again>Another round</button>
     <button class="btn" data-home>Home</button></div>`);
   bindHome();
-  on("[data-again]","click",startPractice);
+  on("[data-again]","click",()=>startPractice(forcedStage));
 }
 
 /* ---------- browse ---------------------------------------------------- */
