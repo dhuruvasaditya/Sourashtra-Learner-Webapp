@@ -62,10 +62,22 @@ you read along. For dishes, driving, walking.
 
 ### Progress
 
-The home screen shows **Due now** (ready for review), **Learning** (started, not
-yet mastered) and **Learned** (answered right four times running). A phrase has
-to survive four correct reviews spread over days before it counts as learned, so
-that last number moves slowly on purpose.
+The home screen shows **Due now** (ready for review today), **Learning** (started,
+not yet mastered) and **Learned**. The small line above them — `107 phrases ·
+84 not started` — is the rest: phrases you have never been shown.
+
+A phrase becomes **Learned** on the third consecutive **Got it**, which on the
+natural schedule lands about a week after you first see it:
+
+| | Box | Next review |
+|---|---|---|
+| 1st Got it | 2 | in 2 days |
+| 2nd Got it | 3 | in 5 days |
+| 3rd Got it | **4 — Learned** | in 12 days |
+| 4th Got it | 5 | in 30 days |
+
+A single **Again** drops it back to box 1 and it has to climb again, so that
+number moves slowly on purpose.
 
 Progress is kept in the browser under `saurashtra.progress.v1`. It survives
 reloads and app restarts, but it is **per device** — clearing Safari data or moving to a new phone
