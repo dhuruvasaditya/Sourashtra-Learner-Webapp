@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Saurashtra">
+<meta name="theme-color" content="#f7f5f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16161a" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-180.png">
+<title>Saurashtra</title>
+<style>
+:root{
+  --bg:#f7f5f2; --card:#fff; --ink:#1b1b1f; --muted:#6b6b73; --line:#e4e0da;
+  --accent:#b4451f; --accent-ink:#fff; --good:#1f7a4d; --again:#a33a2a;
+  --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#16161a; --card:#212127; --ink:#f0eeea; --muted:#9a9aa3; --line:#32323a;
+    --accent:#e06b3d; --accent-ink:#1b1b1f; --good:#4ec18a; --again:#e8836f;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{
+  font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right)
+          env(safe-area-inset-bottom) env(safe-area-inset-left);
+  -webkit-text-size-adjust:100%;
+}
+#app{max-width:640px;margin:0 auto;padding:20px 18px 40px;min-height:100vh}
+h1{font-size:26px;margin:6px 0 2px;letter-spacing:-.02em}
+.sub{color:var(--muted);font-size:15px;margin:0 0 26px}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+.btn{
+  display:block;width:100%;padding:17px;border-radius:14px;background:var(--card);
+  border:1px solid var(--line);font-size:17px;font-weight:500;text-align:center;
+  margin-bottom:10px;box-shadow:var(--shadow);
+}
+.btn:active{transform:scale(.985)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:transparent;font-weight:600}
+.btn.good{background:var(--good);color:#fff;border-color:transparent;font-weight:600}
+.btn.again{background:transparent;color:var(--again);border-color:currentColor}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row2 .btn{margin-bottom:0}
+.topbar{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.back{color:var(--muted);font-size:16px;padding:6px 0}
+.bar{flex:1;height:4px;background:var(--line);border-radius:2px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.count{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:28px 22px;box-shadow:var(--shadow);margin-bottom:22px;
+}
+.stagetag{
+  font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:18px;
+}
+.sa{font-size:32px;font-weight:600;letter-spacing:-.02em;margin:0 0 8px;line-height:1.2}
+.en{font-size:26px;font-weight:500;margin:0 0 8px;line-height:1.3}
+.lit{color:var(--muted);font-size:15px;font-style:italic;margin:0 0 6px}
+.note{
+  color:var(--muted);font-size:14px;margin:16px 0 0;padding-top:14px;
+  border-top:1px solid var(--line);
+}
+.ask{color:var(--muted);font-size:15px;margin:14px 0 0}
+.play{
+  display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:100px;
+  background:var(--accent);color:var(--accent-ink);font-weight:600;font-size:16px;margin:6px 0;
+}
+.play.ghost{background:transparent;color:var(--accent);border:1px solid currentColor}
+.play[disabled]{opacity:.35}
+input[type=text]{
+  width:100%;padding:15px;font-size:19px;border-radius:12px;background:var(--bg);
+  color:var(--ink);border:1px solid var(--line);margin-top:16px;
+}
+input[type=text]:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.verdict{font-size:15px;font-weight:600;margin-top:12px}
+.verdict.ok{color:var(--good)} .verdict.no{color:var(--again)}
+.search{
+  width:100%;padding:14px 16px;font-size:17px;border-radius:12px;background:var(--card);
+  color:var(--ink);border:1px solid var(--line);margin-bottom:20px;
+}
+.grouphead{
+  font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);margin:26px 0 10px;
+}
+.item{
+  display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:14px 16px;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:8px;
+}
+.item:active{background:var(--bg)}
+.item .txt{flex:1;min-width:0}
+.item .t1{font-size:18px;font-weight:600;margin-bottom:2px}
+.item .t2{font-size:15px;color:var(--muted)}
+.item .t3{font-size:13px;color:var(--muted);font-style:italic;margin-top:2px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--line);flex:none}
+.dot.b1{background:var(--again)} .dot.b2,.dot.b3{background:var(--accent)}
+.dot.b4,.dot.b5{background:var(--good)}
+.spk{font-size:19px;opacity:.5;flex:none}
+.empty{color:var(--muted);text-align:center;padding:50px 20px;font-size:16px}
+.stats{display:flex;gap:8px;margin:0 0 24px}
+.stat{
+  flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:12px 8px;text-align:center;
+}
+.stat b{display:block;font-size:21px;font-variant-numeric:tabular-nums}
+.stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.tiny{color:var(--muted);font-size:13px;text-align:center;margin-top:28px;line-height:1.7}
+.tiny a{color:var(--muted)}
+textarea{
+  width:100%;height:110px;font:12px/1.4 ui-monospace,Menlo,monospace;padding:12px;
+  border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);
+  margin-bottom:10px;
+}
+.done{text-align:center;padding:36px 12px}
+.done .big{font-size:44px;margin-bottom:14px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+"use strict";
+
+/* ---------- constants ------------------------------------------------- */
+const STORE   = "saurashtra.progress.v1";
+const BOX_DAYS = {1:0, 2:2, 3:5, 4:12, 5:30};   // Leitner intervals
+const NEW_PER_SESSION = 5, REVIEW_PER_SESSION = 15;
+
+let PHRASES = [];
+let CATS = {};              // id -> label, ordered
+let progress = {};
+
+/* ---------- storage --------------------------------------------------- */
+function loadProgress(){
+  try { progress = JSON.parse(localStorage.getItem(STORE)) || {}; }
+  catch(e){ progress = {}; }
+}
+function saveProgress(){
+  try { localStorage.setItem(STORE, JSON.stringify(progress)); }
+  catch(e){ /* private mode — session still works, just won't persist */ }
+}
+function today(off){
+  const d = new Date();
+  if (off) d.setDate(d.getDate() + off);
+  return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0")
+         + "-" + String(d.getDate()).padStart(2,"0");
+}
+
+/* ---------- scheduling ------------------------------------------------ */
+function stageFor(p){
+  const st = progress[p.id];
+  const box = st ? st.box : 1;
+  let stage = box >= 4 ? "produce" : box >= 2 ? "recall" : "listen";
+  if (stage === "listen" && !p.audio) stage = "recall";   // nothing to play yet
+  return stage;
+}
+function grade(p, ok){
+  const st = progress[p.id] || {box:1};
+  const box = ok ? Math.min(st.box + 1, 5) : 1;
+  progress[p.id] = {box, due: today(BOX_DAYS[box]), seen: (st.seen||0) + 1};
+  saveProgress();
+}
+function dueList(){
+  const t = today();
+  return PHRASES.filter(p => progress[p.id] && progress[p.id].due <= t);
+}
+function newList(){ return PHRASES.filter(p => !progress[p.id]); }
+
+function buildSession(){
+  const due = shuffle(dueList()).slice(0, REVIEW_PER_SESSION);
+  const fresh = newList();
+  const room = NEW_PER_SESSION + Math.max(0, REVIEW_PER_SESSION - due.length);
+  return shuffle(due.concat(fresh.slice(0, room)));
+}
+function shuffle(a){
+  a = a.slice();
+  for (let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* ---------- audio ----------------------------------------------------- */
+/* One shared element, unlocked by the first tap. iOS refuses programmatic
+   playback otherwise, which would silently break the Listen stage. */
+const player = new Audio();
+let unlocked = false;
+function unlock(){
+  if (unlocked) return;
+  unlocked = true;
+  player.play().catch(()=>{});
+  player.pause();
+}
+document.addEventListener("touchend", unlock, {once:true});
+document.addEventListener("click", unlock, {once:true});
+
+function play(file){
+  if (!file) return;
+  player.src = "audio/" + file;
+  player.currentTime = 0;
+  player.play().catch(()=>{});
+}
+function playWait(file){
+  return new Promise(res => {
+    if (!file) return res();
+    const done = () => { player.removeEventListener("ended", done); res(); };
+    player.addEventListener("ended", done);
+    player.src = "audio/" + file;
+    player.currentTime = 0;
+    player.play().catch(() => done());
+  });
+}
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/* ---------- tiny view helpers ----------------------------------------- */
+const app = document.getElementById("app");
+const esc = s => (s||"").replace(/[&<>"]/g, c =>
+  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function show(html){ app.innerHTML = html; window.scrollTo(0,0); }
+function on(sel, ev, fn){ app.querySelectorAll(sel).forEach(el => el.addEventListener(ev, fn)); }
+function topbar(pct, label){
+  return `<div class="topbar"><button class="back" data-home>‹ Done</button>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    <span class="count">${label}</span></div>`;
+}
+function bindHome(){ on("[data-home]","click",home); }
+
+/* ---------- home ------------------------------------------------------ */
+function home(){
+  stopListen();
+  const due = dueList().length, fresh = newList().length;
+  const learned = PHRASES.filter(p => progress[p.id] && progress[p.id].box >= 4).length;
+  const ready = due + Math.min(fresh, NEW_PER_SESSION);
+  show(`
+    <h1>Saurashtra</h1>
+    <p class="sub">${PHRASES.length} phrases</p>
+    <div class="stats">
+      <div class="stat"><b>${due}</b><span>Due</span></div>
+      <div class="stat"><b>${fresh}</b><span>New</span></div>
+      <div class="stat"><b>${learned}</b><span>Learned</span></div>
+    </div>
+    <button class="btn primary" data-practice>
+      ${ready ? "Practice today" : "Nothing due — practice anyway"}
+    </button>
+    <button class="btn" data-browse>Browse</button>
+    <button class="btn" data-listen>Listen</button>
+    <p class="tiny">
+      <a href="#" data-export>Export progress</a> ·
+      <a href="#" data-import>Import</a>
+    </p>`);
+  on("[data-practice]","click",startPractice);
+  on("[data-browse]","click",browse);
+  on("[data-listen]","click",listenPicker);
+  on("[data-export]","click",e=>{e.preventDefault();exportProgress()});
+  on("[data-import]","click",e=>{e.preventDefault();importProgress()});
+}
+
+/* ---------- practice -------------------------------------------------- */
+let session = [], idx = 0;
+
+function startPractice(){
+  session = buildSession();
+  idx = 0;
+  if (!session.length){
+    show(`<div class="done"><div class="big">✓</div>
+      <h1>All caught up</h1><p class="sub">Nothing due today.</p>
+      <button class="btn" data-home>Home</button></div>`);
+    return bindHome();
+  }
+  card();
+}
+
+function card(){
+  if (idx >= session.length) return finished();
+  const p = session[idx];
+  const stage = stageFor(p);
+  const pct = Math.round(idx / session.length * 100);
+  const head = topbar(pct, `${idx+1}/${session.length}`);
+  const tag = {listen:"Listen", recall:"Say it", produce:"Type it"}[stage];
+
+  let body;
+  if (stage === "listen"){
+    body = `<button class="play" data-play>▶ Play again</button>
+            <p class="ask">What does this mean?</p>`;
+  } else if (stage === "recall"){
+    body = `<p class="en">${esc(p.en)}</p>
+            <p class="ask">Say it out loud in Saurashtra.</p>`;
+  } else {
+    body = `<p class="en">${esc(p.en)}</p>
+            <input type="text" id="try" autocapitalize="off" autocorrect="off"
+                   spellcheck="false" placeholder="type the transliteration">`;
+  }
+
+  show(`${head}<div class="card"><div class="stagetag">${tag}</div>${body}</div>
+        <button class="btn primary" data-reveal>Reveal</button>`);
+
+  bindHome();
+  on("[data-play]","click",()=>play(p.audio));
+  on("[data-reveal]","click",()=>reveal(p, stage));
+  const inp = document.getElementById("try");
+  if (inp){
+    inp.addEventListener("keydown", e => { if (e.key === "Enter") reveal(p, stage); });
+  }
+  if (stage === "listen") play(p.audio);
+}
+
+function normalizeTry(s){ return (s||"").toLowerCase().replace(/[^a-z]/g,""); }
+
+function reveal(p, stage){
+  const pct = Math.round((idx + 0.5) / session.length * 100);
+  let verdict = "";
+  if (stage === "produce"){
+    const typed = document.getElementById("try").value;
+    const ok = normalizeTry(typed) === normalizeTry(p.sa);
+    verdict = `<p class="verdict ${ok?"ok":"no"}">
+      ${ok ? "✓ Correct" : "✗ You typed: " + esc(typed || "nothing")}</p>`;
+  }
+  show(`${topbar(pct, `${idx+1}/${session.length}`)}
+    <div class="card">
+      <p class="sa">${esc(p.sa)}</p>
+      <p class="en">${esc(p.en)}</p>
+      ${p.lit ? `<p class="lit">${esc(p.lit)}</p>` : ""}
+      ${verdict}
+      ${p.audio ? `<button class="play ghost" data-play>▶ Play</button>` : ""}
+      ${p.note ? `<p class="note">${esc(p.note)}</p>` : ""}
+    </div>
+    <div class="row2">
+      <button class="btn again" data-again>Again</button>
+      <button class="btn good" data-got>Got it</button>
+    </div>`);
+  bindHome();
+  on("[data-play]","click",()=>play(p.audio));
+  on("[data-again]","click",()=>{
+    grade(p,false);
+    session.push(p);          // comes back before the session ends
+    idx++; card();
+  });
+  on("[data-got]","click",()=>{ grade(p,true); idx++; card(); });
+  if (stage !== "listen" && p.audio) play(p.audio);
+}
+
+function finished(){
+  const learned = PHRASES.filter(p => progress[p.id] && progress[p.id].box >= 4).length;
+  show(`<div class="done"><div class="big">🎉</div>
+    <h1>Session done</h1>
+    <p class="sub">${session.length} cards · ${learned} phrases learned overall</p>
+    <button class="btn primary" data-again>Another round</button>
+    <button class="btn" data-home>Home</button></div>`);
+  bindHome();
+  on("[data-again]","click",startPractice);
+}
+
+/* ---------- browse ---------------------------------------------------- */
+function browse(){
+  const draw = (q="") => {
+    const needle = q.toLowerCase().trim();
+    const hits = PHRASES.filter(p =>
+      !needle || p.en.toLowerCase().includes(needle) || p.sa.toLowerCase().includes(needle));
+    let html = "";
+    for (const cid of Object.keys(CATS)){
+      const rows = hits.filter(p => p.category === cid);
+      if (!rows.length) continue;
+      html += `<div class="grouphead">${esc(CATS[cid])}</div>`;
+      for (const p of rows){
+        const box = progress[p.id] ? progress[p.id].box : 0;
+        html += `<button class="item" data-id="${p.id}">
+          <span class="dot b${box}"></span>
+          <span class="txt">
+            <span class="t1">${esc(p.sa)}</span>
+            <span class="t2">${esc(p.en)}</span>
+            ${p.lit ? `<span class="t3">${esc(p.lit)}</span>` : ""}
+          </span>
+          ${p.audio ? `<span class="spk">▶</span>` : ""}
+        </button>`;
+      }
+    }
+    return html || `<p class="empty">No match for “${esc(q)}”</p>`;
+  };
+
+  show(`<div class="topbar"><button class="back" data-home>‹ Home</button></div>
+    <input class="search" id="q" placeholder="Search English or Saurashtra"
+           autocapitalize="off" autocorrect="off" spellcheck="false">
+    <div id="list">${draw()}</div>`);
+  bindHome();
+
+  const list = document.getElementById("list");
+  const wire = () => list.querySelectorAll(".item").forEach(el =>
+    el.addEventListener("click", () => {
+      const p = PHRASES.find(x => x.id === el.dataset.id);
+      if (p) play(p.audio);
+    }));
+  wire();
+  document.getElementById("q").addEventListener("input", e => {
+    list.innerHTML = draw(e.target.value); wire();
+  });
+}
+
+/* ---------- listen ---------------------------------------------------- */
+let listening = false;
+
+function listenPicker(){
+  let html = `<div class="topbar"><button class="back" data-home>‹ Home</button></div>
+    <h1>Listen</h1>
+    <p class="sub">Plays each phrase with a pause to repeat. Read along on screen.</p>`;
+  for (const cid of Object.keys(CATS)){
+    const n = PHRASES.filter(p => p.category === cid && p.audio).length;
+    if (!n) continue;
+    html += `<button class="btn" data-cat="${cid}">${esc(CATS[cid])}
+      <span class="count"> · ${n}</span></button>`;
+  }
+  const total = PHRASES.filter(p => p.audio).length;
+  if (!total) html += `<p class="empty">No audio recorded yet.</p>`;
+  show(html);
+  bindHome();
+  on("[data-cat]","click",e=>runListen(e.currentTarget.dataset.cat));
+}
+
+async function runListen(cid){
+  const items = PHRASES.filter(p => p.category === cid && p.audio);
+  listening = true;
+  for (let i = 0; i < items.length && listening; i++){
+    const p = items[i];
+    show(`${topbar(Math.round(i/items.length*100), `${i+1}/${items.length}`)}
+      <div class="card">
+        <p class="sa">${esc(p.sa)}</p>
+        <p class="en">${esc(p.en)}</p>
+        ${p.lit ? `<p class="lit">${esc(p.lit)}</p>` : ""}
+      </div>
+      <button class="btn again" data-stop>Stop</button>`);
+    on("[data-home]","click",()=>{stopListen();home()});
+    on("[data-stop]","click",()=>{stopListen();listenPicker()});
+
+    await playWait(p.audio);
+    if (!listening) return;
+    await sleep(2500);                 // learner repeats it, reading the card
+  }
+  if (listening){ listening = false; listenPicker(); }
+}
+function stopListen(){
+  listening = false;
+  player.pause();
+}
+
+/* ---------- export / import ------------------------------------------- */
+function exportProgress(){
+  show(`<div class="topbar"><button class="back" data-home>‹ Home</button></div>
+    <h1>Export</h1>
+    <p class="sub">Copy this and keep it somewhere. Paste it into Import on a new phone.</p>
+    <textarea readonly id="blob">${esc(JSON.stringify(progress))}</textarea>
+    <button class="btn primary" data-copy>Copy</button>`);
+  bindHome();
+  on("[data-copy]","click",async e=>{
+    const t = document.getElementById("blob");
+    t.select(); t.setSelectionRange(0, 99999);
+    try { await navigator.clipboard.writeText(t.value); e.target.textContent = "Copied ✓"; }
+    catch(err){ e.target.textContent = "Select the text and copy it"; }
+  });
+}
+function importProgress(){
+  show(`<div class="topbar"><button class="back" data-home>‹ Home</button></div>
+    <h1>Import</h1>
+    <p class="sub">Paste an exported blob. This replaces your current progress.</p>
+    <textarea id="blob" placeholder='{"0001":{"box":2,...}}'></textarea>
+    <button class="btn primary" data-go>Replace progress</button>`);
+  bindHome();
+  on("[data-go]","click",()=>{
+    try {
+      const parsed = JSON.parse(document.getElementById("blob").value);
+      if (typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("not an object");
+      progress = parsed; saveProgress(); home();
+    } catch(err){
+      alert("That doesn't look like a valid export.\n\n" + err.message);
+    }
+  });
+}
+
+/* ---------- boot ------------------------------------------------------ */
+async function boot(){
+  loadProgress();
+  try {
+    const [phrases, prompts] = await Promise.all([
+      fetch("phrases.json").then(r => r.json()),
+      fetch("prompts.json").then(r => r.json()).catch(() => null)
+    ]);
+    PHRASES = phrases.filter(p => p.sa && p.en);
+    if (prompts) prompts.categories.forEach(c => CATS[c.id] = c.label);
+    // any category present in the data but missing from prompts.json
+    PHRASES.forEach(p => { if (!CATS[p.category]) CATS[p.category] = p.category; });
+    home();
+  } catch(err){
+    show(`<h1>Couldn't load phrases</h1>
+      <p class="sub">${esc(err.message)}</p>
+      <p class="tiny">If you opened this file directly, run a local server instead:<br>
+      <code>python3 -m http.server</code> in the <code>web/</code> folder.</p>`);
+  }
+}
+boot();
+</script>
+</body>
+</html>

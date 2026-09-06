@@ -1,0 +1,171 @@
+{
+  "note": "Recording queue. Work through categories in this order — usefulness per item drops off fast after 'feelings'. Learner is female; all first-person phrases in female speaker form. Respectful register throughout.",
+  "categories": [
+    {
+      "id": "greetings",
+      "label": "Greetings",
+      "prompts": [
+        "Hello",
+        "Good morning",
+        "Good night",
+        "Come in / Welcome",
+        "How are you?",
+        "I'm doing good",
+        "Thank you",
+        "Sorry",
+        "I'll go and come (goodbye)",
+        "It's okay / No problem",
+        "Please",
+        "Take care"
+      ]
+    },
+    {
+      "id": "basics",
+      "label": "Basics",
+      "prompts": [
+        "Yes",
+        "No",
+        "This",
+        "That",
+        "What is this?",
+        "Who is this?",
+        "Who is that?",
+        "I don't know",
+        "I know",
+        "I understand",
+        "I didn't understand",
+        "Maybe",
+        "Okay / Fine",
+        "A little",
+        "A lot",
+        "Here",
+        "There",
+        "Now",
+        "Later"
+      ]
+    },
+    {
+      "id": "learning",
+      "label": "Learning the language",
+      "prompts": [
+        "Do you know Saurashtra?",
+        "I am learning Saurashtra",
+        "I'm learning slowly",
+        "I know a little",
+        "Say it again",
+        "Say it slowly",
+        "What is this called?",
+        "How do you say this in Saurashtra?",
+        "I forgot",
+        "Is this correct?",
+        "Teach me",
+        "I'm trying"
+      ]
+    },
+    {
+      "id": "food",
+      "label": "Food",
+      "prompts": [
+        "Are you hungry?",
+        "I'm hungry",
+        "Have you eaten?",
+        "I have eaten",
+        "I haven't eaten yet",
+        "Come sit and eat",
+        "Do you want some?",
+        "Shall I give a little more?",
+        "That's enough",
+        "It's very tasty",
+        "It's too spicy",
+        "It's too salty",
+        "Do you want tea?",
+        "I'll make tea",
+        "Give me water",
+        "I'm thirsty",
+        "What did you cook?",
+        "I'm cooking"
+      ]
+    },
+    {
+      "id": "home",
+      "label": "Around the house",
+      "prompts": [
+        "Come here",
+        "Go",
+        "Sit down",
+        "Wait a minute",
+        "Where are you?",
+        "I'm coming",
+        "Let's go",
+        "Are you ready?",
+        "Did you sleep well?",
+        "Go to sleep",
+        "Wake up",
+        "Open the door",
+        "Close the door",
+        "Switch on the light",
+        "Switch off the light",
+        "Where did you keep it?",
+        "Give it to me",
+        "Take this"
+      ]
+    },
+    {
+      "id": "feelings",
+      "label": "Feelings",
+      "prompts": [
+        "I'm happy",
+        "I'm tired",
+        "Are you okay?",
+        "I'm not feeling well",
+        "I have a headache",
+        "Don't worry",
+        "Don't be angry",
+        "I'm joking",
+        "That's beautiful",
+        "I'm bored",
+        "Be careful"
+      ]
+    },
+    {
+      "id": "daily",
+      "label": "Daily talk",
+      "prompts": [
+        "What are you doing?",
+        "What happened?",
+        "Where are you going?",
+        "When will you come?",
+        "Have you finished?",
+        "Not yet",
+        "Just now",
+        "Today",
+        "Tomorrow",
+        "Yesterday",
+        "Let's go out",
+        "Are you busy?",
+        "Call me",
+        "I'll call you later"
+      ]
+    },
+    {
+      "id": "people",
+      "label": "Family",
+      "prompts": [
+        "Mother",
+        "Father",
+        "Elder sister",
+        "Elder brother",
+        "Younger sister",
+        "Younger brother",
+        "Husband",
+        "Wife",
+        "Son",
+        "Daughter",
+        "Grandmother",
+        "Grandfather",
+        "Aunt (mother's sister)",
+        "Uncle"
+      ]
+    }
+  ]
+}

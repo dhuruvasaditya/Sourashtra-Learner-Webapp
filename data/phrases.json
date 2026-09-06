@@ -1,0 +1,929 @@
+[
+  {
+    "id": "0001",
+    "sa": "illa kaya?",
+    "en": "What is this?",
+    "lit": "this what?",
+    "audio": null,
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0002",
+    "sa": "enu konu?",
+    "en": "Who is that?",
+    "lit": "that who?",
+    "audio": null,
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0003",
+    "sa": "thumi kaithiryaya?",
+    "en": "Have you eaten?",
+    "lit": "you eaten-Q",
+    "audio": null,
+    "category": "food",
+    "note": "Used constantly as a general greeting, like 'how are you'."
+  },
+  {
+    "id": "0005",
+    "sa": "me sowriyam",
+    "en": "I'm doing good",
+    "lit": "I well",
+    "audio": null,
+    "category": "greetings",
+    "note": ""
+  },
+  {
+    "id": "0006",
+    "sa": "sourashtra kalaaiya?",
+    "en": "Do you know Saurashtra?",
+    "lit": "Saurashtra know-Q",
+    "audio": null,
+    "category": "learning",
+    "note": ""
+  },
+  {
+    "id": "0007",
+    "sa": "kalaaiya?",
+    "en": "Do you know?",
+    "lit": "know-Q",
+    "audio": null,
+    "category": "learning",
+    "note": ""
+  },
+  {
+    "id": "0008",
+    "sa": "uva uva kalaai",
+    "en": "I know a little",
+    "lit": "little little know",
+    "audio": null,
+    "category": "learning",
+    "note": "Reduplication 'uva uva' softens it to 'just a little bit'."
+  },
+  {
+    "id": "0009",
+    "sa": "hallu sikila setha",
+    "en": "I'm learning slowly",
+    "lit": "slowly learning am",
+    "audio": null,
+    "category": "learning",
+    "note": ""
+  },
+  {
+    "id": "0010",
+    "sa": "thunga bhook keraras ya?",
+    "en": "Are you hungry?",
+    "lit": "to-you hunger doing-Q",
+    "audio": null,
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0011",
+    "sa": "katha bisuvo",
+    "en": "Come sit and eat",
+    "lit": "eat sit",
+    "audio": null,
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0012",
+    "sa": "thunga pajeya?",
+    "en": "Do you want some?",
+    "lit": "to-you want-Q",
+    "audio": null,
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0013",
+    "sa": "angum uva dhevuya?",
+    "en": "Shall I give a little more?",
+    "lit": "more little give-Q",
+    "audio": null,
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0014",
+    "sa": "kai heyo?",
+    "en": "What happened?",
+    "lit": "what happened",
+    "audio": null,
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0015",
+    "sa": "thumi kai keraryo?",
+    "en": "What are you doing?",
+    "lit": "you what doing",
+    "audio": null,
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0016",
+    "sa": "avo bhithar avo",
+    "en": "Come in / Welcome",
+    "lit": "come inside come",
+    "audio": "0016.mp3",
+    "category": "greetings",
+    "note": ""
+  },
+  {
+    "id": "0017",
+    "sa": "thumi sowriyamya",
+    "en": "How are you?",
+    "lit": "you good?",
+    "audio": "0017.mp3",
+    "category": "greetings",
+    "note": ""
+  },
+  {
+    "id": "0018",
+    "sa": "me jeeli avusi",
+    "en": "I'll go and come (goodbye)",
+    "lit": "i go and come",
+    "audio": "0018.mp3",
+    "category": "greetings",
+    "note": ""
+  },
+  {
+    "id": "0019",
+    "sa": "koni prechana nhi",
+    "en": "It's okay / No problem",
+    "lit": "any problem no",
+    "audio": "0019.mp3",
+    "category": "greetings",
+    "note": ""
+  },
+  {
+    "id": "0020",
+    "sa": "bodhuram",
+    "en": "Take care / be safe",
+    "lit": "",
+    "audio": "0020.mp3",
+    "category": "greetings",
+    "note": ""
+  },
+  {
+    "id": "0021",
+    "sa": "haayi",
+    "en": "Yes",
+    "lit": "",
+    "audio": "0021.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0022",
+    "sa": "nhi",
+    "en": "No",
+    "lit": "",
+    "audio": "0022.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0023",
+    "sa": "illeh",
+    "en": "This",
+    "lit": "",
+    "audio": "0023.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0024",
+    "sa": "thelleh",
+    "en": "That",
+    "lit": "",
+    "audio": "0024.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0025",
+    "sa": "enu konu",
+    "en": "Who is this?",
+    "lit": "",
+    "audio": "0025.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0026",
+    "sa": "moga kalani",
+    "en": "I don't know",
+    "lit": "",
+    "audio": "0026.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0027",
+    "sa": "moga kalai",
+    "en": "I know",
+    "lit": "",
+    "audio": "0027.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0028",
+    "sa": "moga purinjarasi",
+    "en": "I understand",
+    "lit": "i am understanding",
+    "audio": "0028.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0029",
+    "sa": "moga purinjarani",
+    "en": "I didn't understand",
+    "lit": "",
+    "audio": "0029.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0030",
+    "sa": "uva",
+    "en": "A little",
+    "lit": "",
+    "audio": "0030.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0031",
+    "sa": "juku",
+    "en": "A lot",
+    "lit": "",
+    "audio": "0031.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0032",
+    "sa": "yedu",
+    "en": "Here",
+    "lit": "",
+    "audio": "0032.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0033",
+    "sa": "bhodhuram",
+    "en": "Take care",
+    "lit": "",
+    "audio": "0033.mp3",
+    "category": "greetings",
+    "note": ""
+  },
+  {
+    "id": "0034",
+    "sa": "theadu",
+    "en": "There",
+    "lit": "",
+    "audio": "0034.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0035",
+    "sa": "athuh",
+    "en": "Now",
+    "lit": "",
+    "audio": "0035.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0036",
+    "sa": "heladhu",
+    "en": "Later",
+    "lit": "",
+    "audio": "0036.mp3",
+    "category": "basics",
+    "note": ""
+  },
+  {
+    "id": "0037",
+    "sa": "mi sourashtra sikile sethe",
+    "en": "I am learning Saurashtra",
+    "lit": "",
+    "audio": "0037.mp3",
+    "category": "learning",
+    "note": ""
+  },
+  {
+    "id": "0038",
+    "sa": "angondal sanguvo",
+    "en": "Say it again",
+    "lit": "onemoretime say",
+    "audio": "0038.mp3",
+    "category": "learning",
+    "note": ""
+  },
+  {
+    "id": "0039",
+    "sa": "uva halu sanguvo",
+    "en": "Say it slowly",
+    "lit": "little slowly say",
+    "audio": "0039.mp3",
+    "category": "learning",
+    "note": ""
+  },
+  {
+    "id": "0040",
+    "sa": "ila kai sangan",
+    "en": "What is this called?",
+    "lit": "this what called",
+    "audio": "0040.mp3",
+    "category": "learning",
+    "note": ""
+  },
+  {
+    "id": "0041",
+    "sa": "ila sourashtram kona sangatha",
+    "en": "How do you say this in Saurashtra?",
+    "lit": "this sourashtram how tell",
+    "audio": "0041.mp3",
+    "category": "learning",
+    "note": ""
+  },
+  {
+    "id": "0042",
+    "sa": "moga howdam jediyo",
+    "en": "I forgot",
+    "lit": "me memory gone",
+    "audio": "0042.mp3",
+    "category": "learning",
+    "note": ""
+  },
+  {
+    "id": "0043",
+    "sa": "ila correctu ya",
+    "en": "Is this correct?",
+    "lit": "this correct ?",
+    "audio": "0043.mp3",
+    "category": "learning",
+    "note": ""
+  },
+  {
+    "id": "0044",
+    "sa": "moga sikadi dhevo",
+    "en": "Teach me",
+    "lit": "me teach give",
+    "audio": "0044.mp3",
+    "category": "learning",
+    "note": ""
+  },
+  {
+    "id": "0045",
+    "sa": "me try kerarya",
+    "en": "I'm trying",
+    "lit": "",
+    "audio": "0045.mp3",
+    "category": "learning",
+    "note": ""
+  },
+  {
+    "id": "0046",
+    "sa": "moga bhook keraras",
+    "en": "I'm hungry",
+    "lit": "forme hunger happening",
+    "audio": "0046.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0047",
+    "sa": "mi khaidhirya",
+    "en": "I have eaten",
+    "lit": "",
+    "audio": "0047.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0048",
+    "sa": "mi angum khairya nhi",
+    "en": "I haven't eaten yet",
+    "lit": "me yet eat no",
+    "audio": "0048.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0049",
+    "sa": "illa fijay",
+    "en": "This is enough",
+    "lit": "this enough",
+    "audio": "0049.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0050",
+    "sa": "ila tasty gan se",
+    "en": "It's very tasty",
+    "lit": "this tasty is",
+    "audio": "0050.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0051",
+    "sa": "ila thikey se",
+    "en": "It's too spicy",
+    "lit": "this spicey",
+    "audio": "0051.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0052",
+    "sa": "ilamaam meed (salt) jhuku (more) se",
+    "en": "in this more salt is there",
+    "lit": "",
+    "audio": "0052.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0053",
+    "sa": "thunga tea pajeya",
+    "en": "Do you want tea?",
+    "lit": "you tea want",
+    "audio": "0053.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0054",
+    "sa": "me tea thavusi",
+    "en": "I'll make tea",
+    "lit": "i tea put (make)",
+    "audio": "0054.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0055",
+    "sa": "moga pani dhevo",
+    "en": "Give me water",
+    "lit": "",
+    "audio": "0055.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0056",
+    "sa": "moga sok keraras",
+    "en": "I'm thirsty",
+    "lit": "",
+    "audio": "0056.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0057",
+    "sa": "thumi kai handhirya",
+    "en": "What did you cook?",
+    "lit": "you what cook",
+    "audio": "0057.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0058",
+    "sa": "me handhule sethe",
+    "en": "I'm cooking",
+    "lit": "i cooking am",
+    "audio": "0058.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0059",
+    "sa": "ed avo",
+    "en": "Come here",
+    "lit": "here come",
+    "audio": "0059.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0060",
+    "sa": "bisuvo",
+    "en": "Sit down",
+    "lit": "",
+    "audio": "0060.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0061",
+    "sa": "uva wait keruvo",
+    "en": "Wait a minute",
+    "lit": "",
+    "audio": "0061.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0062",
+    "sa": "thumi kod sethe",
+    "en": "Where are you?",
+    "lit": "",
+    "audio": "0062.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0063",
+    "sa": "mi ovle setha",
+    "en": "I'm coming / im omw",
+    "lit": "i coming am",
+    "audio": "0063.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0064",
+    "sa": "avo jengen",
+    "en": "come Let's go",
+    "lit": "",
+    "audio": "0064.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0065",
+    "sa": "thumi redy ya",
+    "en": "Are you ready?",
+    "lit": "",
+    "audio": "0065.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0066",
+    "sa": "thunga fongu aves ya",
+    "en": "Did sleep come for you?",
+    "lit": "",
+    "audio": "0066.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0067",
+    "sa": "injatha javo",
+    "en": "Go to sleep",
+    "lit": "sleep go",
+    "audio": "0067.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0068",
+    "sa": "fuduvo",
+    "en": "Wake up",
+    "lit": "",
+    "audio": "0068.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0069",
+    "sa": "door open keruvo",
+    "en": "Open the door",
+    "lit": "",
+    "audio": "0069.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0070",
+    "sa": "door jaidhuvo",
+    "en": "Close the door",
+    "lit": "",
+    "audio": "0070.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0071",
+    "sa": "light on keruvo",
+    "en": "Switch on the light",
+    "lit": "",
+    "audio": "0071.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0072",
+    "sa": "light off keruvo",
+    "en": "Switch off the light",
+    "lit": "",
+    "audio": "0072.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0073",
+    "sa": "xyz kod thoveyo",
+    "en": "Where did you keep xyz?",
+    "lit": "",
+    "audio": "0073.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0074",
+    "sa": "morajal dheeduvo",
+    "en": "Give it to me",
+    "lit": "to-me give",
+    "audio": "0074.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0075",
+    "sa": "ileh khaluvo",
+    "en": "Take this",
+    "lit": "",
+    "audio": "0075.mp3",
+    "category": "home",
+    "note": ""
+  },
+  {
+    "id": "0076",
+    "sa": "moga tired lavaras",
+    "en": "I'm tired",
+    "lit": "me tired feeling",
+    "audio": "0076.mp3",
+    "category": "feelings",
+    "note": ""
+  },
+  {
+    "id": "0077",
+    "sa": "thumi ok ya",
+    "en": "Are you okay? (not how are you doing)",
+    "lit": "",
+    "audio": "0077.mp3",
+    "category": "feelings",
+    "note": ""
+  },
+  {
+    "id": "0078",
+    "sa": "moga chod lavarani",
+    "en": "I'm not feeling well",
+    "lit": "",
+    "audio": "0078.mp3",
+    "category": "feelings",
+    "note": ""
+  },
+  {
+    "id": "0079",
+    "sa": "moga dhoska dhukaras",
+    "en": "I have a headache",
+    "lit": "me head paining",
+    "audio": "0079.mp3",
+    "category": "feelings",
+    "note": ""
+  },
+  {
+    "id": "0080",
+    "sa": "raag avalnagan",
+    "en": "Don't be angry",
+    "lit": "anger dont-let-it-come",
+    "audio": "0080.mp3",
+    "category": "feelings",
+    "note": ""
+  },
+  {
+    "id": "0081",
+    "sa": "me joke kerayo",
+    "en": "I'm joking",
+    "lit": "",
+    "audio": "0081.mp3",
+    "category": "feelings",
+    "note": ""
+  },
+  {
+    "id": "0082",
+    "sa": "thelle singaar se",
+    "en": "That's beautiful",
+    "lit": "",
+    "audio": "0082.mp3",
+    "category": "feelings",
+    "note": ""
+  },
+  {
+    "id": "0083",
+    "sa": "moga bore hanaras",
+    "en": "I'm bored",
+    "lit": "",
+    "audio": "0083.mp3",
+    "category": "feelings",
+    "note": ""
+  },
+  {
+    "id": "0084",
+    "sa": "bhodhuram",
+    "en": "Be careful",
+    "lit": "",
+    "audio": "0084.mp3",
+    "category": "feelings",
+    "note": ""
+  },
+  {
+    "id": "0085",
+    "sa": "thumi kod jaaryo",
+    "en": "Where are you going?",
+    "lit": "",
+    "audio": "0085.mp3",
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0086",
+    "sa": "thumi khobo avan",
+    "en": "When will you come?",
+    "lit": "you when come",
+    "audio": "0086.mp3",
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0087",
+    "sa": "thumi musatriya ya",
+    "en": "Have you finished it?",
+    "lit": "you finished ya",
+    "audio": "0087.mp3",
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0088",
+    "sa": "angum nhi",
+    "en": "Not yet",
+    "lit": "",
+    "audio": "0088.mp3",
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0089",
+    "sa": "athas",
+    "en": "Just now",
+    "lit": "",
+    "audio": "0089.mp3",
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0090",
+    "sa": "hindha",
+    "en": "Today",
+    "lit": "",
+    "audio": "0090.mp3",
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0091",
+    "sa": "sondha",
+    "en": "Tomorrow",
+    "lit": "",
+    "audio": "0091.mp3",
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0092",
+    "sa": "kaal",
+    "en": "Yesterday",
+    "lit": "",
+    "audio": "0092.mp3",
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0093",
+    "sa": "ami bharad jengen",
+    "en": "Let us go out",
+    "lit": "",
+    "audio": "0093.mp3",
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0094",
+    "sa": "thumi busy ya",
+    "en": "Are you busy?",
+    "lit": "",
+    "audio": "0094.mp3",
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0095",
+    "sa": "moga call keruvo",
+    "en": "Call me",
+    "lit": "",
+    "audio": "0095.mp3",
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0096",
+    "sa": "me heladhu call kerus",
+    "en": "I'll call you later",
+    "lit": "i later call do",
+    "audio": "0096.mp3",
+    "category": "daily",
+    "note": ""
+  },
+  {
+    "id": "0097",
+    "sa": "amba",
+    "en": "Mother",
+    "lit": "",
+    "audio": "0097.mp3",
+    "category": "people",
+    "note": ""
+  },
+  {
+    "id": "0098",
+    "sa": "baba",
+    "en": "Father",
+    "lit": "",
+    "audio": "0098.mp3",
+    "category": "people",
+    "note": ""
+  },
+  {
+    "id": "0099",
+    "sa": "bei",
+    "en": "Elder sister",
+    "lit": "",
+    "audio": "0099.mp3",
+    "category": "people",
+    "note": ""
+  },
+  {
+    "id": "0100",
+    "sa": "dha",
+    "en": "Elder brother",
+    "lit": "",
+    "audio": "0100.mp3",
+    "category": "people",
+    "note": ""
+  },
+  {
+    "id": "0101",
+    "sa": "bedo",
+    "en": "Son",
+    "lit": "",
+    "audio": "0101.mp3",
+    "category": "people",
+    "note": ""
+  },
+  {
+    "id": "0102",
+    "sa": "unger-ambo",
+    "en": "Grandmother",
+    "lit": "",
+    "audio": "0102.mp3",
+    "category": "people",
+    "note": ""
+  },
+  {
+    "id": "0103",
+    "sa": "anger-bo",
+    "en": "Grandfather",
+    "lit": "",
+    "audio": "0103.mp3",
+    "category": "people",
+    "note": ""
+  },
+  {
+    "id": "0104",
+    "sa": "mama",
+    "en": "Uncle",
+    "lit": "",
+    "audio": "0104.mp3",
+    "category": "people",
+    "note": ""
+  }
+]
