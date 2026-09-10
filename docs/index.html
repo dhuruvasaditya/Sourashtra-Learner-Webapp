@@ -495,8 +495,9 @@ function question(){
   const asking = quizMode === "listen";
 
   const prompt = asking
-    ? `<button class="play" data-play>▶ Play again</button>
-       <p class="ask">Which one is it?</p>`
+    ? `<p class="sa">${esc(q.answer.sa)}</p>
+       <button class="play" data-play>▶ Play</button>
+       <p class="ask">What does it mean?</p>`
     : `<p class="en">${esc(q.answer.en)}</p>
        <p class="ask">Which one is it?</p>`;
 
@@ -525,11 +526,9 @@ function answer(q, chosen){
   document.querySelector(".count").textContent =
     `${qIdx+1}/${quiz.length} · ${qScore} right`;
 
-  // In listen mode the transliteration was never shown, so reveal it. In recall
-  // mode it is already highlighted green above — only the gloss adds anything.
-  const reveal = quizMode === "listen"
-    ? esc(q.answer.sa) + (q.answer.lit ? " — " + esc(q.answer.lit) : "")
-    : esc(q.answer.lit || "");
+  // The transliteration is already on screen either way — as the prompt in
+  // listen mode, or highlighted green among the options in recall mode.
+  const reveal = esc(q.answer.lit || "");
   if (reveal){
     document.querySelector(".card").insertAdjacentHTML("beforeend",
       `<p class="lit" style="margin-top:14px">${reveal}</p>`);

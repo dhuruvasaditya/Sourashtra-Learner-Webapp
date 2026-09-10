@@ -64,6 +64,9 @@ practice, and **Quiz** to check yourself. The quiz is multiple choice — four
 options, one right — so the result is an actual score rather than your own
 judgement. Up to 10 questions, drawn at random.
 
+The Sourashtra → English quiz shows the transliteration as well as playing the
+audio, so it works without headphones.
+
 The wrong options come from the same category, so you cannot guess by
 elimination. You see immediately whether you were right, with the answer and
 its gloss, before moving on.
