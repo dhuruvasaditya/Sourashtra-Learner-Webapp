@@ -115,6 +115,22 @@ textarea{
   border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);
   margin-bottom:10px;
 }
+.opt{
+  display:block;width:100%;padding:15px 17px;border-radius:12px;background:var(--card);
+  border:1px solid var(--line);text-align:left;font-size:17px;margin-bottom:9px;
+  box-shadow:var(--shadow);
+}
+.opt:active{transform:scale(.99)}
+.opt.right{background:var(--good);color:#fff;border-color:transparent;font-weight:600}
+.opt.wrong{background:var(--again);color:#fff;border-color:transparent;font-weight:600}
+.catrow{margin-bottom:18px}
+.cathead{
+  display:flex;justify-content:space-between;align-items:baseline;
+  gap:12px;margin-bottom:7px;
+}
+.cathead .nm{font-size:17px;font-weight:600}
+.cathead span{font-size:13px;color:var(--muted);white-space:nowrap}
+.score{font-size:56px;font-weight:700;letter-spacing:-.04em;margin:0 0 2px;line-height:1}
 .done{text-align:center;padding:36px 12px}
 .done .big{font-size:44px;margin-bottom:14px}
 </style>
@@ -126,12 +142,16 @@ textarea{
 
 /* ---------- constants ------------------------------------------------- */
 const STORE = "saurashtra.progress.v1";
+const QUIZ_STORE = "saurashtra.quiz.v1";
+const QUIZ_LEN = 10;          // questions per quiz, or the whole category if smaller
+const QUIZ_OPTIONS = 4;
 const SESSION_MAX = 20;
 const SOLID = 3;            // "got it" this many times in a row = solid
 
 let PHRASES = [];
 let CATS = {};              // id -> label, ordered
 let progress = {};          // id -> {got: n}   n = correct answers in a row
+let quizScores = {};        // "mode:category" -> {score, total}
 
 /* ---------- storage --------------------------------------------------- */
 function loadProgress(){
@@ -152,9 +172,18 @@ function saveProgress(){
   try { localStorage.setItem(STORE, JSON.stringify(progress)); }
   catch(e){ /* private mode — session still works, just won't persist */ }
 }
+function loadQuizScores(){
+  try { quizScores = JSON.parse(localStorage.getItem(QUIZ_STORE)) || {}; }
+  catch(e){ quizScores = {}; }
+}
+function saveQuizScores(){
+  try { localStorage.setItem(QUIZ_STORE, JSON.stringify(quizScores)); } catch(e){}
+}
+const quizKey = (mode, cid) => `${mode}:${cid || "all"}`;
+
 function resetProgress(){
-  progress = {};
-  try { localStorage.removeItem(STORE); } catch(e){}
+  progress = {}; quizScores = {};
+  try { localStorage.removeItem(STORE); localStorage.removeItem(QUIZ_STORE); } catch(e){}
 }
 
 /* ---------- progress -------------------------------------------------- */
@@ -253,6 +282,7 @@ function home(){
   forcedStage = null;
   chosenCat = null;
   chosenStreak = null;
+  quiz = [];
   const fresh = PHRASES.filter(p => !started(p)).length;
   const at = n => PHRASES.filter(p => started(p) && gotCount(p) === n).length;
   const solid = PHRASES.filter(p => gotCount(p) >= SOLID).length;
@@ -302,31 +332,43 @@ const MODE_NAME = {recall: "English → Sourashtra", listen: "Sourashtra → Eng
 
 /* Choose what to practise before starting. Going straight into a mixed session
    makes it impossible to drill the one category you actually need today. */
+function catRow(mode, cid, rows){
+  const label = cid ? CATS[cid] : "Everything, mixed";
+  const done  = rows.filter(started).length;
+  const last  = quizScores[quizKey(mode, cid)];
+  const canQuiz = rows.length >= 2;   // a quiz needs something to choose between
+  return `<div class="catrow">
+    <div class="cathead"><span class="nm">${esc(label)}</span>
+      <span>${done}/${rows.length} done</span></div>
+    <div class="row2">
+      <button class="btn" data-cat="${cid || ""}" data-kind="cards">Flashcards</button>
+      <button class="btn" data-cat="${cid || ""}" data-kind="quiz" ${canQuiz ? "" : "disabled"}>Quiz
+        <span class="mhint">${last ? `last ${last.score}/${last.total}` : "not tried"}</span>
+      </button>
+    </div>
+  </div>`;
+}
+
 function pickCategory(mode){
   const pool = mode === "listen" ? PHRASES.filter(p => p.audio) : PHRASES;
 
   let html = `<div class="topbar"><button class="back" data-home>‹ Home</button></div>
     <h1>${esc(MODE_NAME[mode])}</h1>
-    <p class="sub">What do you want to practise?</p>
-    <button class="btn primary" data-cat="">
-      Everything, mixed
-      <span class="mhint">${pool.filter(started).length}/${pool.length} done · ${
-        pool.filter(p => gotCount(p) >= SOLID).length} got ${SOLID}+</span>
-    </button>
-    <div class="grouphead">Or one category</div>`;
+    <p class="sub">Flashcards to learn, quiz to check yourself.</p>
+    ${catRow(mode, null, pool)}
+    <div class="grouphead">By category</div>`;
 
   for (const cid of Object.keys(CATS)){
     const rows = pool.filter(p => p.category === cid);
-    if (!rows.length) continue;
-    const done = rows.filter(started).length;
-    const firm = rows.filter(p => gotCount(p) >= SOLID).length;
-    html += `<button class="btn" data-cat="${cid}">${esc(CATS[cid])}
-      <span class="mhint">${done}/${rows.length} done${firm ? ` · ${firm} got ${SOLID}+` : ""}</span>
-    </button>`;
+    if (rows.length) html += catRow(mode, cid, rows);
   }
   show(html);
   bindHome();
-  on("[data-cat]","click",e=>startPractice(mode, e.currentTarget.dataset.cat || null));
+  on("[data-cat]","click",e=>{
+    const cid = e.currentTarget.dataset.cat || null;
+    if (e.currentTarget.dataset.kind === "quiz") startQuiz(mode, cid);
+    else startPractice(mode, cid);
+  });
 }
 
 function startPractice(mode, cid, streak){
@@ -413,6 +455,121 @@ function finished(){
   bindHome();
   on("[data-again]","click",()=>startPractice(forcedStage, chosenCat, chosenStreak));
   on("[data-pick]","click",()=>pickCategory(forcedStage));
+}
+
+/* ---------- quiz ------------------------------------------------------ */
+/* Multiple choice, so the result is an actual score rather than a self
+   assessment. Deliberately does not touch the flashcard streaks — this is the
+   measurement, not the practice. */
+
+let quiz = [], qIdx = 0, qScore = 0, quizMode = null, quizCat = null;
+
+function buildQuiz(mode, cid){
+  let pool = mode === "listen" ? PHRASES.filter(p => p.audio) : PHRASES;
+  if (cid) pool = pool.filter(p => p.category === cid);
+
+  return shuffle(pool).slice(0, QUIZ_LEN).map(answer => {
+    // Wrong answers come from the same category first — picking "Food" out of
+    // three greetings would be too easy to be worth asking.
+    let wrong = shuffle(pool.filter(x => x.id !== answer.id)).slice(0, QUIZ_OPTIONS - 1);
+    if (wrong.length < QUIZ_OPTIONS - 1){
+      const ids = new Set([answer.id, ...wrong.map(x => x.id)]);
+      wrong = wrong.concat(shuffle(PHRASES.filter(x => !ids.has(x.id)))
+                            .slice(0, QUIZ_OPTIONS - 1 - wrong.length));
+    }
+    return {answer, options: shuffle([answer, ...wrong])};
+  });
+}
+
+function startQuiz(mode, cid){
+  quizMode = mode; quizCat = cid;
+  quiz = buildQuiz(mode, cid);
+  qIdx = 0; qScore = 0;
+  question();
+}
+
+function question(){
+  if (qIdx >= quiz.length) return quizDone();
+  const q = quiz[qIdx];
+  const pct = Math.round(qIdx / quiz.length * 100);
+  const asking = quizMode === "listen";
+
+  const prompt = asking
+    ? `<button class="play" data-play>▶ Play again</button>
+       <p class="ask">Which one is it?</p>`
+    : `<p class="en">${esc(q.answer.en)}</p>
+       <p class="ask">Which one is it?</p>`;
+
+  show(`${topbar(pct, `${qIdx+1}/${quiz.length} · ${qScore} right`)}
+    <div class="card">${prompt}</div>
+    ${q.options.map((o,i) =>
+      `<button class="opt" data-i="${i}">${esc(asking ? o.en : o.sa)}</button>`).join("")}`);
+
+  bindHome();
+  on("[data-play]","click",()=>play(q.answer.audio));
+  on("[data-i]","click",e=>answer(q, Number(e.currentTarget.dataset.i)));
+  if (asking) play(q.answer.audio);
+}
+
+function answer(q, chosen){
+  const picked = q.options[chosen];
+  const right = picked.id === q.answer.id;
+  if (right) qScore++;
+
+  // Freeze the options, mark the right one, and show what went wrong.
+  [...document.querySelectorAll(".opt")].forEach((el, i) => {
+    el.disabled = true;
+    if (q.options[i].id === q.answer.id) el.classList.add("right");
+    else if (i === chosen) el.classList.add("wrong");
+  });
+  document.querySelector(".count").textContent =
+    `${qIdx+1}/${quiz.length} · ${qScore} right`;
+
+  // In listen mode the transliteration was never shown, so reveal it. In recall
+  // mode it is already highlighted green above — only the gloss adds anything.
+  const reveal = quizMode === "listen"
+    ? esc(q.answer.sa) + (q.answer.lit ? " — " + esc(q.answer.lit) : "")
+    : esc(q.answer.lit || "");
+  if (reveal){
+    document.querySelector(".card").insertAdjacentHTML("beforeend",
+      `<p class="lit" style="margin-top:14px">${reveal}</p>`);
+  }
+  if (q.answer.audio) play(q.answer.audio);
+
+  const next = document.createElement("button");
+  next.className = "btn primary";
+  next.textContent = qIdx + 1 < quiz.length ? "Next" : "See score";
+  next.addEventListener("click", () => { qIdx++; question(); });
+  document.getElementById("app").appendChild(next);
+}
+
+function quizDone(){
+  const key = quizKey(quizMode, quizCat);
+  const previous = quizScores[key];
+  quizScores[key] = {score: qScore, total: quiz.length};
+  saveQuizScores();
+
+  const pctScore = Math.round(qScore / quiz.length * 100);
+  const where = quizCat ? esc(CATS[quizCat]) : "Everything";
+  const verdict = pctScore === 100 ? "Perfect." : pctScore >= 80 ? "Strong."
+                : pctScore >= 50 ? "Getting there." : "Worth some flashcards.";
+  const change = previous
+    ? `Last time ${previous.score}/${previous.total}.`
+    : "First time through.";
+
+  show(`<div class="done">
+      <p class="score">${qScore}/${quiz.length}</p>
+      <h1>${where}</h1>
+      <p class="sub">${verdict} ${change}</p>
+      <button class="btn primary" data-retry>Try again</button>
+      <button class="btn" data-cards>Practise these with flashcards</button>
+      <button class="btn" data-pick>Different category</button>
+      <button class="btn" data-home>Home</button>
+    </div>`);
+  bindHome();
+  on("[data-retry]","click",()=>startQuiz(quizMode, quizCat));
+  on("[data-cards]","click",()=>startPractice(quizMode, quizCat));
+  on("[data-pick]","click",()=>pickCategory(quizMode));
 }
 
 /* ---------- browse ---------------------------------------------------- */
@@ -525,7 +682,7 @@ function confirmReset(){
   const n = Object.keys(progress).length;
   show(`<div class="topbar"><button class="back" data-home>‹ Home</button></div>
     <h1>Reset everything</h1>
-    <p class="sub">This clears every "got it" count on this device and starts
+    <p class="sub">This clears every "got it" count and quiz score on this device and starts
       all ${PHRASES.length} phrases from scratch. The phrases and recordings stay.
       It cannot be undone.</p>
     ${n ? `<button class="btn again" data-go>Reset ${n} phrases</button>`
@@ -556,6 +713,7 @@ function importProgress(){
 /* ---------- boot ------------------------------------------------------ */
 async function boot(){
   loadProgress();
+  loadQuizScores();
   try {
     const [phrases, prompts] = await Promise.all([
       fetch("phrases.json").then(r => r.json()),

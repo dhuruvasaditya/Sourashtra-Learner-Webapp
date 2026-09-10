@@ -57,6 +57,25 @@ never-seen and just-missed ones come up before the ones you already know.
 **Reset everything** on the home screen clears all counts on that device and
 starts over. Phrases and recordings are untouched.
 
+### Quiz
+
+Every category has two buttons: **Flashcards** for the usual self-graded
+practice, and **Quiz** to check yourself. The quiz is multiple choice — four
+options, one right — so the result is an actual score rather than your own
+judgement. Up to 10 questions, drawn at random.
+
+The wrong options come from the same category, so you cannot guess by
+elimination. You see immediately whether you were right, with the answer and
+its gloss, before moving on.
+
+Your last score sits on the button — `Quiz · last 5/7` — and the score screen
+tells you what you got last time, so you can see whether you are improving.
+Scores are kept per direction, so the English → Sourashtra and
+Sourashtra → English quizzes for a category are tracked separately.
+
+Taking a quiz does **not** change your flashcard counts. It measures; it does
+not teach.
+
 ### Browse
 
 Searchable list grouped by category, matching English *and* transliteration. Tap
