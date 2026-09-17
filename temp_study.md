@@ -144,15 +144,15 @@ This is the highest-probability question in the interview. Have all three, not j
 |---|---|---|---|
 | Loss | Contrastive (InfoNCE) | Next-token (LM) | Next-token (LM) |
 | Text side | Text **encoder** | Small text **decoder**, from scratch | Pretrained **LLM**, mostly frozen |
-| Vision side | Image encoder | Image encoder, trained jointly | Pretrained encoder, frozen |
-| Bridge | Shared embedding space | Concatenate tokens | Learned **projector** into LLM token space |
+| Vision side | Image encoder | Image encoder, **trained jointly** | Pretrained encoder, **frozen** |
+| Bridge | Shared embedding space | Linear + LayerNorm, then concatenate | Projector (linear v1 / MLP v1.5) into LLM token space |
 | Output | An embedding | Free text | Free text |
 | Can it reason? | No | Weakly | Yes — inherits the LLM |
 | Cost | Medium | High (train everything) | Low (train the projector) |
 
 **Say this out loud:**
 
-> *"CLIP learns an aligned embedding space between two modalities with a contrastive loss — the output is a vector, not language. GIT and LLaVA both generate language, but differently: GIT trains a vision encoder and a small text decoder jointly from scratch under a single language-modelling loss — deliberately minimal, no detectors, no auxiliary losses. LLaVA instead reuses a pretrained vision encoder and a pretrained LLM and only learns a projector that maps visual features into the LLM's token space, so it inherits the LLM's reasoning cheaply. GIT is more end-to-end; LLaVA is more compute-efficient and smarter out of the box."*
+> *"CLIP learns an aligned embedding space between two modalities with a contrastive loss — the output is a vector, not language. GIT and LLaVA both generate language, but differently: GIT trains a vision encoder and a small text decoder jointly under a single language-modelling loss — it still projects image features with a linear layer and LayerNorm, but it drops the object detector and all the auxiliary losses prior systems used. LLaVA instead reuses a pretrained vision encoder and a pretrained LLM and only learns a projector that maps visual features into the LLM's token space, so it inherits the LLM's reasoning cheaply. GIT is more end-to-end; LLaVA is more compute-efficient and smarter out of the box."*
 
 ---
 
@@ -168,9 +168,10 @@ Pre-GIT vision-language systems were Rube Goldberg machines: an object detector 
 
 ```mermaid
 flowchart LR
-    I["Image"] --> E["Image Encoder<br/>(contrastively pretrained)"]
-    E --> IT["image tokens<br/>bidirectional attention"]
-    T["Text tokens"] --> TT["text tokens<br/>causal attention"]
+    I["Image"] --> E["Image Encoder<br/>(contrastively pretrained,<br/>TRAINED JOINTLY)"]
+    E --> PR["flatten + Linear + LayerNorm<br/>project to decoder dim D"]
+    PR --> IT["image tokens<br/>bidirectional attention"]
+    T["Text tokens"] --> TT["word emb + pos enc<br/>causal attention"]
     IT --> D["Transformer<br/>Text Decoder"]
     TT --> D
     D --> O["next-token prediction<br/>ONE loss"]
@@ -179,6 +180,7 @@ flowchart LR
 ### Key facts
 
 - **One** encoder, **one** decoder, **one** language-modelling loss. No detector, no auxiliary objectives.
+- There *is* a projection — image features are flattened and passed through a **linear layer + LayerNorm** to reach the decoder's dimension, then concatenated with text embeddings. The "simplicity" is about deleting the **object detector and the auxiliary losses** (image-text matching, masked LM, object tagging) that prior VLP systems stacked up — not about deleting the projection.
 - Image tokens attend bidirectionally (they're all available at once); text tokens attend causally (autoregressive generation).
 - Scaled to ~0.8B image-text pairs; the largest variant went far beyond.
 - SOTA on COCO captioning, VQA, and **first system to exceed human performance on TextCaps**.
