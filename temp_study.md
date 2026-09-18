@@ -823,6 +823,147 @@ Write an answer to each before the interview. He *will* ask some version of thes
 
 ---
 
+# Part 8B — The Atlas Design Sheet
+
+> One page you should be able to reconstruct on a whiteboard. If he says *"how would you actually build it,"* this is the answer.
+
+## 8B.1 Input spec
+
+| Tier | Signals | Rate | Coverage |
+|---|---|---|---|
+| Core inertial | accel xyz, gyro xyz | 50–100 Hz | ~all trips |
+| Localization | lat/lon, speed, course, HDOP | 1 Hz | ~all trips |
+| Secondary | barometer (impact pressure spike, road grade), magnetometer | 1–10 Hz | most |
+| Device context | phone model, OS, mount state, screen on/off, call state, battery | per trip/event | all |
+| Map context | road class, speed limit, curvature, intersection type | per position | derived |
+| Environment | weather, precipitation, light level, time of day | per trip | derived |
+| Vehicle | OBD/CAN: brake, throttle, steering, airbag | variable | **few** |
+| Video | dashcam frames | 1–30 fps | **few** |
+
+**The binding input constraint: modality availability is asymmetric.** Most trips are phone-only; a minority have a Tag; very few have CAN or video. So the encoder must accept **any subset by construction** — per-modality encoders into a shared token space, learned null embeddings for absent modalities, and modality dropout during pretraining so the model never learns to depend on a signal it usually won't have. A model requiring all modalities is useless on the real data distribution.
+
+## 8B.2 Output spec — three tiers
+
+**Tier 1 — a hierarchy of embeddings** (the actual product):
+
+| Level | Granularity | Feeds |
+|---|---|---|
+| Per-timestep | ~10 Hz | Event localization, impact timing |
+| Per-segment | ~seconds | Maneuver semantics |
+| Per-trip | 1 vector | Retrieval, trip scoring |
+| Per-driver | aggregated | The insurance product |
+
+**Tier 2 — a structured event token stream** (the unified interface). Apply Florence-2's location-token trick to *time and physics*:
+
+```
+<trip_start> <urban> <night> <rain>
+  <t_0123> <hard_brake> <sev_4> <decel_07>
+  <t_0127> <IMPACT>     <dv_12> <pdof_330>
+  <t_0131> <post_impact_rotation>
+<trip_end>
+```
+
+Time index, severity, Δv, and principal direction of force are all quantised into vocabulary entries — so **one cross-entropy loss covers detection, temporal localisation, severity regression and classification at once.** Four things this buys that a scalar scorer can't: a **likelihood** (label-free anomaly mining), **generation** (synthesise rare crashes), **counterfactuals** (what if the brake token came 0.5 s earlier — this is how coaching gets grounded), and **auditability** (a discrete event trace is defensible to a regulator; a 768-d vector isn't).
+
+**Tier 3 — heads.** Calibrated crash probability; risk features → GLM. Natural language sits only at the edge (coaching message, FNOL narrative) and is generated **from the event token stream, not from raw sensors** — which keeps it grounded and auditable.
+
+## 8B.3 Data strategy
+
+| Tier | What | Scale | Used for |
+|---|---|---|---|
+| **A** | All trips, unlabelled | ~10⁹ | Backbone pretraining |
+| **B** | Weak labels from existing production detectors (hard brake, speeding, phone handling) | ~10⁷ | SupCon positives, data-engine seed, event heads |
+| **C** | Verified crashes from claims/FNOL | ~10⁴ | **Precious — never spend on the backbone.** Classifier head + eval only |
+| **D** | Synthetic: crash-test sled data, vehicle-dynamics simulation, signal-level augmentation of real crashes into new contexts | generated | Tail coverage for the crash head |
+| **E** | Paired-modality subsets (CAN / video / Tag) | small | Cross-modal alignment stage |
+
+**Data engine** (Florence-2's lesson):
+
+```mermaid
+flowchart LR
+    A["Tier A unlabelled"] --> B["ensemble of existing<br/>detectors + current Atlas"]
+    B --> C["pseudo-labels<br/>+ confidence"]
+    C --> D["filter by agreement"]
+    D --> E["train Atlas"]
+    E -->|"better model =<br/>better annotator"| B
+    C --> F["route only the<br/>high-uncertainty /<br/>high-anomaly slice<br/>to human review"]
+    F --> D
+```
+
+**Curation rules** (the Llama-3 / Phi-4 lesson, applied):
+- **Deduplicate aggressively.** A billion miles of straight interstate is one mile repeated. Near-duplicate trip segments waste compute and skew the prior.
+- **Upweight rare context:** night, rain, snow, dense urban, unusual devices, emerging markets.
+- **Stratify by device and geography** so the mix isn't dominated by whichever carrier has the most users.
+- Curation is where the wins are — not architecture.
+
+## 8B.4 Pretraining curriculum
+
+| Stage | Objective | Data | Why |
+|---|---|---|---|
+| **0** | Fit canonicalisation + tokeniser | sample of A | Gravity/heading → vehicle frame; resample; patch statistics |
+| **1** | **Masked reconstruction** (primary, ~70% of compute) | A | High mask ratio (MAE found 75% ≫ BERT's 15%); gives temporally-precise local features |
+| **2** | **Autoregressive head** (auxiliary) | A | Yields a likelihood → label-free rare-event mining |
+| **3** | **Trip-level contrastive** (SupCon with Tier-B weak labels) | A + B | Tight global embeddings for risk scoring and retrieval |
+| **4** | **Cross-modal alignment** (IMU2CLIP-style) | E | Semantic space → zero-shot, NL retrieval, grounded coaching |
+| **5** | **Midtraining: long-context extension** | A, long trips upsampled | 2-min windows → full 20–60 min trips. Raise RoPE base frequency, upsample long sequences — directly the Phi-4 recipe |
+
+**Loss weighting:** masked reconstruction dominant; AR and contrastive as small-weight auxiliaries; cross-modal loss masked out on trips lacking the paired modality.
+
+**Scaling discipline** — the director-grade part of this answer: **don't pick a model size, run the sweep.** Train 20M / 100M / 500M on a subsample, fit the loss-vs-compute curve, and choose the compute-optimal point *given the edge constraint*. The deployable artefact has to distil to ~5–20M anyway, so the question is how large a teacher actually improves the student — which is an empirical question, not an opinion.
+
+## 8B.5 Fine-tuning and heads
+
+**Default policy: freeze the backbone, train light heads.** Unfreeze the top N layers only if the linear probe lands materially below full fine-tuning — and measure that gap rather than assuming it.
+
+| Head | Input | Training data | Method |
+|---|---|---|---|
+| **Crash** | per-timestep + segment emb | C + D | **Decoupled classifier** (Kang et al.) on frozen features → logit adjustment → temperature scaling |
+| **Event detectors** (brake, swerve, distraction, driver-vs-passenger) | segment emb | B | Linear / shallow MLP probes |
+| **Event token decoder** | full sequence | B + C | Small AR decoder over the structured vocabulary — the unified interface |
+| **Risk** | trip emb → driver-month aggregate | portfolio outcomes | Features only → **GLM or monotonic GBM** that gets filed with the state DOI. The FM does **not** output the price |
+| **Retrieval** | trip emb | E (stage-4 text space) | k-NN index |
+| **Coaching text** | **event token stream**, not raw sensors | curated | Small conditioned LM; grounded and auditable |
+
+**LoRA for carrier-specific adaptation.** Insurers want models tuned to their book without maintaining N full copies of the backbone — adapters are the right shape for that.
+
+## 8B.6 The evaluation that decides whether any of this was worth it
+
+Not "did the crash head improve." The headline metric is the **label-efficiency curve**:
+
+```
+  downstream metric
+        │
+        │        ╭──────────  Atlas backbone + head
+        │      ╭─╯
+        │    ╭─╯      ╭───────  supervised from scratch
+        │  ╭─╯     ╭──╯
+        │╭─╯   ╭───╯
+        └──────────────────────► number of labels
+         10²   10³   10⁴
+
+  The claim to prove: "same metric with 10× fewer labels."
+  That is the foundation-model value proposition, and it is measurable.
+```
+
+Splits held out by **driver, device, geography, and time** — never randomly.
+
+## 8B.7 If he asks "what would you do in your first 90 days"
+
+1. **Weeks 1–3:** build the eval harness before the model. Held-out splits by device/geo/time, label-efficiency curve, PR-AUC and FP/1000-trips dashboards. You cannot improve what you can't measure, and the splits are where sensor ML usually goes wrong.
+2. **Weeks 3–6:** canonicalisation and tokenisation pipeline; validate that gravity/heading alignment measurably beats raw device frame on a downstream probe.
+3. **Weeks 6–10:** stage-1 masked pretraining at small scale; scaling sweep; linear probes versus the existing production detectors.
+4. **Weeks 10–13:** decoupled crash head on frozen features; label-efficiency curve versus the current system. **Ship one head that beats production**, however small — credibility first, generality second.
+
+## 8B.8 The 90-second whiteboard answer
+
+> *"Input is any subset of IMU, GPS, barometer, map and device context, plus CAN or video where they exist — modality dropout in pretraining so the model never depends on a signal most trips don't have. Output is two things: a hierarchy of embeddings from per-timestep up to per-driver, and a structured event token stream where I quantise time, severity and delta-V into a vocabulary the way Florence-2 quantised coordinates — so detection, localisation and severity collapse into one cross-entropy loss, and I get a likelihood for anomaly mining and generation for synthetic tail data for free.*
+>
+> *Pretraining is staged: masked reconstruction as the primary objective on all unlabelled trips, an autoregressive head and a trip-level contrastive term as auxiliaries, cross-modal alignment on whatever paired subset exists, then a midtraining stage to extend context from two-minute windows to full trips. The verified crashes never touch the backbone — they're too scarce, so they go to a decoupled classifier head on frozen features, plus calibration.*
+>
+> *And the metric that decides whether the whole thing was worth building isn't crash AUC — it's the label-efficiency curve. If Atlas doesn't hit production performance with roughly an order of magnitude fewer labels, it hasn't earned its cost."*
+
+---
+
 # Part 9 — Rapid-Fire Drill (20 min)
 
 Time yourself. 60–90 seconds each, out loud, no notes.
@@ -840,7 +981,7 @@ Time yourself. 60–90 seconds each, out loud, no notes.
 | 9 | How do you evaluate a foundation model? | Part 7.1 |
 | 10 | How do you split train/test for driving data? | Part 7.1 |
 | 11 | How does this ship to a phone? | Part 7.2 |
-| 12 | Design Atlas | Part 8 |
+| 12 | Design Atlas — I/O, data, pretraining stages, heads | Part 8 + **8B** |
 | 13 | **Tell me about your work** | Below ⭐ |
 
 ## Question 13 is your closer — rehearse it most
