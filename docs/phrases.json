@@ -5,7 +5,7 @@
     "en": "What is this?",
     "lit": "this what?",
     "audio": "0001.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -14,7 +14,7 @@
     "en": "Who is that?",
     "lit": "that who?",
     "audio": "0002.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -32,7 +32,7 @@
     "en": "I'm doing good",
     "lit": "I well",
     "audio": "0005.mp3",
-    "category": "greetings",
+    "category": "courtesy",
     "note": ""
   },
   {
@@ -41,7 +41,7 @@
     "en": "Do you know Saurashtra?",
     "lit": "Saurashtra know-Q",
     "audio": "0006.mp3",
-    "category": "learning",
+    "category": "talking",
     "note": ""
   },
   {
@@ -50,7 +50,7 @@
     "en": "Do you know?",
     "lit": "know-Q",
     "audio": "0007.mp3",
-    "category": "learning",
+    "category": "talking",
     "note": ""
   },
   {
@@ -59,7 +59,7 @@
     "en": "I know a little",
     "lit": "little little know",
     "audio": "0008.mp3",
-    "category": "learning",
+    "category": "talking",
     "note": "Reduplication 'uva uva' softens it to 'just a little bit'."
   },
   {
@@ -68,7 +68,7 @@
     "en": "I'm learning slowly",
     "lit": "slowly learning am",
     "audio": "0009.mp3",
-    "category": "learning",
+    "category": "talking",
     "note": ""
   },
   {
@@ -113,7 +113,7 @@
     "en": "What happened?",
     "lit": "what happened",
     "audio": "0014.mp3",
-    "category": "daily",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -122,7 +122,7 @@
     "en": "What are you doing?",
     "lit": "you what doing",
     "audio": "0015.mp3",
-    "category": "daily",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -131,7 +131,7 @@
     "en": "Come in / Welcome",
     "lit": "come inside come",
     "audio": "0016.mp3",
-    "category": "greetings",
+    "category": "courtesy",
     "note": ""
   },
   {
@@ -140,7 +140,7 @@
     "en": "How are you?",
     "lit": "you good?",
     "audio": "0017.mp3",
-    "category": "greetings",
+    "category": "courtesy",
     "note": ""
   },
   {
@@ -149,7 +149,7 @@
     "en": "I'll go and come (goodbye)",
     "lit": "i go and come",
     "audio": "0018.mp3",
-    "category": "greetings",
+    "category": "courtesy",
     "note": ""
   },
   {
@@ -158,7 +158,7 @@
     "en": "It's okay / No problem",
     "lit": "any problem no",
     "audio": "0019.mp3",
-    "category": "greetings",
+    "category": "courtesy",
     "note": ""
   },
   {
@@ -167,7 +167,7 @@
     "en": "Take care / be safe",
     "lit": "",
     "audio": "0020.mp3",
-    "category": "greetings",
+    "category": "courtesy",
     "note": ""
   },
   {
@@ -176,7 +176,7 @@
     "en": "Yes",
     "lit": "",
     "audio": "0021.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -185,7 +185,7 @@
     "en": "No",
     "lit": "",
     "audio": "0022.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -194,7 +194,7 @@
     "en": "This",
     "lit": "",
     "audio": "0023.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -203,7 +203,7 @@
     "en": "That",
     "lit": "",
     "audio": "0024.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -212,7 +212,7 @@
     "en": "Who is this?",
     "lit": "",
     "audio": "0025.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -221,7 +221,7 @@
     "en": "I don't know",
     "lit": "",
     "audio": "0026.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -230,7 +230,7 @@
     "en": "I know",
     "lit": "",
     "audio": "0027.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -239,7 +239,7 @@
     "en": "I understand",
     "lit": "i am understanding",
     "audio": "0028.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -248,7 +248,7 @@
     "en": "I didn't understand",
     "lit": "",
     "audio": "0029.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -257,7 +257,7 @@
     "en": "A little",
     "lit": "",
     "audio": "0030.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -266,7 +266,7 @@
     "en": "A lot",
     "lit": "",
     "audio": "0031.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -275,7 +275,7 @@
     "en": "Here",
     "lit": "",
     "audio": "0032.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -284,7 +284,7 @@
     "en": "Take care",
     "lit": "",
     "audio": "0033.mp3",
-    "category": "greetings",
+    "category": "courtesy",
     "note": ""
   },
   {
@@ -293,7 +293,7 @@
     "en": "There",
     "lit": "",
     "audio": "0034.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -302,7 +302,7 @@
     "en": "Now",
     "lit": "",
     "audio": "0035.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -311,7 +311,7 @@
     "en": "Later",
     "lit": "",
     "audio": "0036.mp3",
-    "category": "basics",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -320,7 +320,7 @@
     "en": "I am learning Saurashtra",
     "lit": "",
     "audio": "0037.mp3",
-    "category": "learning",
+    "category": "talking",
     "note": ""
   },
   {
@@ -329,7 +329,7 @@
     "en": "Say it again",
     "lit": "onemoretime say",
     "audio": "0038.mp3",
-    "category": "learning",
+    "category": "talking",
     "note": ""
   },
   {
@@ -338,7 +338,7 @@
     "en": "Say it slowly",
     "lit": "little slowly say",
     "audio": "0039.mp3",
-    "category": "learning",
+    "category": "talking",
     "note": ""
   },
   {
@@ -347,7 +347,7 @@
     "en": "What is this called?",
     "lit": "this what called",
     "audio": "0040.mp3",
-    "category": "learning",
+    "category": "talking",
     "note": ""
   },
   {
@@ -356,7 +356,7 @@
     "en": "How do you say this in Saurashtra?",
     "lit": "this sourashtram how tell",
     "audio": "0041.mp3",
-    "category": "learning",
+    "category": "talking",
     "note": ""
   },
   {
@@ -365,7 +365,7 @@
     "en": "I forgot",
     "lit": "me memory gone",
     "audio": "0042.mp3",
-    "category": "learning",
+    "category": "talking",
     "note": ""
   },
   {
@@ -374,7 +374,7 @@
     "en": "Is this correct?",
     "lit": "this correct ?",
     "audio": "0043.mp3",
-    "category": "learning",
+    "category": "talking",
     "note": ""
   },
   {
@@ -383,7 +383,7 @@
     "en": "Teach me",
     "lit": "me teach give",
     "audio": "0044.mp3",
-    "category": "learning",
+    "category": "talking",
     "note": ""
   },
   {
@@ -392,7 +392,7 @@
     "en": "I'm trying",
     "lit": "",
     "audio": "0045.mp3",
-    "category": "learning",
+    "category": "talking",
     "note": ""
   },
   {
@@ -518,7 +518,7 @@
     "en": "Come here",
     "lit": "here come",
     "audio": "0059.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -527,7 +527,7 @@
     "en": "Sit down",
     "lit": "",
     "audio": "0060.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -536,7 +536,7 @@
     "en": "Wait a minute",
     "lit": "",
     "audio": "0061.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -545,7 +545,7 @@
     "en": "Where are you?",
     "lit": "",
     "audio": "0062.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -554,7 +554,7 @@
     "en": "I'm coming / im omw",
     "lit": "i coming am",
     "audio": "0063.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -563,7 +563,7 @@
     "en": "Are you ready?",
     "lit": "",
     "audio": "0065.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -572,7 +572,7 @@
     "en": "Did sleep come for you?",
     "lit": "",
     "audio": "0066.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -581,7 +581,7 @@
     "en": "Go to sleep",
     "lit": "sleep go",
     "audio": "0067.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -590,7 +590,7 @@
     "en": "Wake up",
     "lit": "",
     "audio": "0068.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -599,7 +599,7 @@
     "en": "Open the door",
     "lit": "",
     "audio": "0069.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -608,7 +608,7 @@
     "en": "Close the door",
     "lit": "",
     "audio": "0070.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -617,7 +617,7 @@
     "en": "Switch on the light",
     "lit": "",
     "audio": "0071.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -626,7 +626,7 @@
     "en": "Switch off the light",
     "lit": "",
     "audio": "0072.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -635,7 +635,7 @@
     "en": "Where did you keep xyz?",
     "lit": "",
     "audio": "0073.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -644,7 +644,7 @@
     "en": "Give it to me",
     "lit": "to-me give",
     "audio": "0074.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -653,7 +653,7 @@
     "en": "Take this",
     "lit": "",
     "audio": "0075.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -734,7 +734,7 @@
     "en": "Where are you going?",
     "lit": "",
     "audio": "0085.mp3",
-    "category": "daily",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -743,7 +743,7 @@
     "en": "When will you come?",
     "lit": "you when come",
     "audio": "0086.mp3",
-    "category": "daily",
+    "category": "family",
     "note": ""
   },
   {
@@ -752,7 +752,7 @@
     "en": "Not yet",
     "lit": "",
     "audio": "0088.mp3",
-    "category": "daily",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -761,7 +761,7 @@
     "en": "Just now",
     "lit": "",
     "audio": "0089.mp3",
-    "category": "daily",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -770,7 +770,7 @@
     "en": "Today",
     "lit": "",
     "audio": "0090.mp3",
-    "category": "daily",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -779,7 +779,7 @@
     "en": "Tomorrow",
     "lit": "",
     "audio": "0091.mp3",
-    "category": "daily",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -788,7 +788,7 @@
     "en": "Yesterday",
     "lit": "",
     "audio": "0092.mp3",
-    "category": "daily",
+    "category": "essentials",
     "note": ""
   },
   {
@@ -797,7 +797,7 @@
     "en": "Let us go out",
     "lit": "",
     "audio": "0093.mp3",
-    "category": "daily",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -806,7 +806,7 @@
     "en": "Are you busy?",
     "lit": "",
     "audio": "0094.mp3",
-    "category": "daily",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -815,7 +815,7 @@
     "en": "Call me",
     "lit": "",
     "audio": "0095.mp3",
-    "category": "daily",
+    "category": "family",
     "note": ""
   },
   {
@@ -824,7 +824,7 @@
     "en": "I'll call you later",
     "lit": "i later call do",
     "audio": "0096.mp3",
-    "category": "daily",
+    "category": "family",
     "note": ""
   },
   {
@@ -833,7 +833,7 @@
     "en": "Mother",
     "lit": "",
     "audio": "0097.mp3",
-    "category": "people",
+    "category": "family",
     "note": ""
   },
   {
@@ -842,7 +842,7 @@
     "en": "Father",
     "lit": "",
     "audio": "0098.mp3",
-    "category": "people",
+    "category": "family",
     "note": ""
   },
   {
@@ -851,7 +851,7 @@
     "en": "Elder sister",
     "lit": "",
     "audio": "0099.mp3",
-    "category": "people",
+    "category": "family",
     "note": ""
   },
   {
@@ -860,7 +860,7 @@
     "en": "Elder brother",
     "lit": "",
     "audio": "0100.mp3",
-    "category": "people",
+    "category": "family",
     "note": ""
   },
   {
@@ -869,7 +869,7 @@
     "en": "Son",
     "lit": "",
     "audio": "0101.mp3",
-    "category": "people",
+    "category": "family",
     "note": ""
   },
   {
@@ -878,7 +878,7 @@
     "en": "Grandmother",
     "lit": "",
     "audio": "0102.mp3",
-    "category": "people",
+    "category": "family",
     "note": ""
   },
   {
@@ -887,7 +887,7 @@
     "en": "Grandfather",
     "lit": "",
     "audio": "0103.mp3",
-    "category": "people",
+    "category": "family",
     "note": ""
   },
   {
@@ -896,7 +896,7 @@
     "en": "Uncle",
     "lit": "",
     "audio": "0104.mp3",
-    "category": "people",
+    "category": "family",
     "note": ""
   },
   {
@@ -905,7 +905,7 @@
     "en": "I'm coming",
     "lit": "",
     "audio": "0105.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -914,7 +914,7 @@
     "en": "Let us go",
     "lit": "",
     "audio": "0106.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -923,7 +923,7 @@
     "en": "Did you sleep well?",
     "lit": "you good slept ya",
     "audio": "0107.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -932,7 +932,7 @@
     "en": "Where did you keep it?",
     "lit": "you where kept",
     "audio": "0108.mp3",
-    "category": "home",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -950,7 +950,7 @@
     "en": "Have you finished?",
     "lit": "",
     "audio": "0110.mp3",
-    "category": "daily",
+    "category": "dailylife",
     "note": ""
   },
   {
@@ -959,7 +959,7 @@
     "en": "Let's go out",
     "lit": "",
     "audio": "0111.mp3",
-    "category": "daily",
+    "category": "dailylife",
     "note": ""
   }
 ]

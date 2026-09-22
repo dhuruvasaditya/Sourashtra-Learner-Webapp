@@ -54,7 +54,7 @@ Hosting: GitHub Pages, serving `docs/`. Add to Home Screen on iPhone.
 | `en` | Natural English meaning — not a literal translation. |
 | `lit` | Word-by-word gloss. Costs seconds to write, and it is what lets the learner start decomposing phrases instead of memorizing opaque blobs. Empty string if unclear. |
 | `audio` | Filename in `docs/audio/`. `null` until recorded. |
-| `category` | One of the ids in `prompts.json`. |
+| `category` | One of seven fixed ids: `essentials`, `talking`, `courtesy`, `food`, `family`, `dailylife`, `feelings`. Seven is deliberate — a browse screen with twenty categories is worse than one with seven. Add new prompts into an existing bucket; do not add an eighth. |
 | `note` | Usage hint from the speaker. Optional, often the most valuable field. |
 
 ## Romanization key
