@@ -5,6 +5,9 @@ plus a desktop tool for collecting the data. Two users. No backend.
 
 ## Assumptions (fixed, do not add fields for these)
 
+- **The audience is the learner's in-laws**, not a spouse or peer. This drives
+  content: offers rather than commands, kinship-term address, and the food/guest
+  ritual as the central axis of conversation.
 - **The learner is female.** All first-person phrases are recorded in the female
   speaker form. No gender field.
 - **All speech is respectful register.** No register field.

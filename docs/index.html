@@ -402,7 +402,8 @@ function card(){
   const tag = stage === "listen" ? "Listen" : "Say it";
 
   const body = stage === "listen"
-    ? `<button class="play" data-play>▶ Play again</button>
+    ? `<p class="sa">${esc(p.sa)}</p>
+       <button class="play" data-play>▶ Play</button>
        <p class="ask">What does this mean?</p>`
     : `<p class="en">${esc(p.en)}</p>
        <p class="ask">Say it out loud in Sourashtra.</p>`;

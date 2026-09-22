@@ -20,7 +20,7 @@ mixed. A session is about 20 cards, and the app tracks which ones are due.
 | Mode | You see | You do |
 |---|---|---|
 | **English → Sourashtra** | the English | say it aloud in Sourashtra, tap Reveal |
-| **Sourashtra → English** | audio plays | work out what it means, tap Reveal |
+| **Sourashtra → English** | the transliteration, and the audio plays | work out what it means, tap Reveal |
 
 The category step matters: drilling *Food* before a family dinner beats a random
 mix of everything. Each category shows how far through it you are — `4/17 done`
@@ -64,8 +64,8 @@ practice, and **Quiz** to check yourself. The quiz is multiple choice — four
 options, one right — so the result is an actual score rather than your own
 judgement. Up to 10 questions, drawn at random.
 
-The Sourashtra → English quiz shows the transliteration as well as playing the
-audio, so it works without headphones.
+Both Sourashtra → English screens — quiz and flashcards — show the
+transliteration as well as playing the audio, so they work without headphones.
 
 The wrong options come from the same category, so you cannot guess by
 elimination. You see immediately whether you were right, with the answer and

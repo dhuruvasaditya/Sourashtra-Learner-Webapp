@@ -166,6 +166,340 @@
         "Aunt (mother's sister)",
         "Uncle"
       ]
+    },
+    {
+      "id": "hosting",
+      "label": "Being fed (the food dance)",
+      "prompts": [
+        "You cook so well",
+        "I ate a lot",
+        "I'm full",
+        "No more, thank you",
+        "Just a little",
+        "That's enough for me",
+        "I'll take it myself",
+        "Shall I serve you?",
+        "Please, you eat first",
+        "I've already eaten",
+        "I don't eat that",
+        "It's a little spicy for me",
+        "Can I have some water?",
+        "What is this dish called?",
+        "Teach me how to make this",
+        "I'll wash my plate",
+        "It smells very good",
+        "I'll eat later"
+      ]
+    },
+    {
+      "id": "reactions",
+      "label": "Reactions & glue",
+      "prompts": [
+        "Really?",
+        "Is that so?",
+        "Oh, I see",
+        "Of course",
+        "That's right / exactly",
+        "Yes yes",
+        "Why?",
+        "Why not?",
+        "What to do",
+        "Leave it / forget it",
+        "Let it be",
+        "Oh no!",
+        "Very nice",
+        "That's correct",
+        "Who knows",
+        "I think so",
+        "One minute",
+        "Listen",
+        "Look at this",
+        "Slowly, slowly",
+        "Nothing",
+        "Like this?"
+      ]
+    },
+    {
+      "id": "family_talk",
+      "label": "Talking about the family",
+      "prompts": [
+        "How are you all?",
+        "How is everyone at home?",
+        "He is at work",
+        "He will call you",
+        "He is coming",
+        "We are both fine",
+        "We will come next time",
+        "What did you do today?",
+        "Did you go out today?",
+        "Who else is at home?",
+        "Please give him the phone",
+        "Say hello to everyone",
+        "I'll tell him",
+        "Did you eat?"
+      ]
+    },
+    {
+      "id": "elders",
+      "label": "Asking after elders",
+      "prompts": [
+        "How is your health?",
+        "Are you feeling better?",
+        "Did you take your medicine?",
+        "Please take rest",
+        "Please be careful",
+        "Shall I bring it for you?",
+        "Please don't lift that, I'll do it",
+        "Did you sleep well?",
+        "Is your leg still paining?",
+        "Please go slowly",
+        "Hold my hand",
+        "Please sit here"
+      ]
+    },
+    {
+      "id": "visiting",
+      "label": "Arriving & leaving",
+      "prompts": [
+        "We have come",
+        "Sorry we are late",
+        "Shall I take off my shoes?",
+        "Where should I keep this?",
+        "We brought this for you",
+        "We should leave now",
+        "It's getting late for us",
+        "Thank you for everything",
+        "We'll come again soon",
+        "Please come to our house",
+        "We reached home safely",
+        "We're leaving now",
+        "How was the journey?",
+        "Please come and visit us"
+      ]
+    },
+    {
+      "id": "asking",
+      "label": "Asking & requesting",
+      "prompts": [
+        "Can you help me?",
+        "Can I ask you something?",
+        "Shall I come?",
+        "Shall we go?",
+        "Should I do it?",
+        "No need",
+        "I'll do it later",
+        "One minute please",
+        "Can you bring it?",
+        "Can you show me?",
+        "Please tell me",
+        "Let me see",
+        "Can you say that again?",
+        "What did you say?",
+        "I couldn't hear",
+        "Can you speak a little slower?",
+        "Whose is this?",
+        "Which one?"
+      ]
+    },
+    {
+      "id": "helping",
+      "label": "Offering to help",
+      "prompts": [
+        "Shall I help you?",
+        "Let me do it",
+        "Shall I wash the dishes?",
+        "Shall I clean this?",
+        "I'll bring it",
+        "Please sit, I'll do it",
+        "Don't trouble yourself",
+        "Where should I put this?",
+        "Where is the bathroom?",
+        "Can I take a bath?",
+        "Is there hot water?",
+        "Can I use this?",
+        "I'll tidy this up",
+        "Shall I make tea?"
+      ]
+    },
+    {
+      "id": "gratitude",
+      "label": "Warmth & apology",
+      "prompts": [
+        "Thank you so much",
+        "You've done so much for me",
+        "I'm very happy",
+        "I liked it very much",
+        "I'm happy to see you",
+        "I missed you all",
+        "Sorry, it's my mistake",
+        "Please forgive me",
+        "It's alright",
+        "Please don't worry about me"
+      ]
+    },
+    {
+      "id": "understanding",
+      "label": "Questions they will ask you",
+      "prompts": [
+        "When did you come?",
+        "When are you going back?",
+        "Are you tired?",
+        "Do you like it?",
+        "Is it enough?",
+        "Shall I make tea for you?",
+        "Do you want anything?",
+        "Is everything okay?",
+        "What will you eat?",
+        "How is your mother?",
+        "How is your father?",
+        "Are you comfortable?"
+      ]
+    },
+    {
+      "id": "phone",
+      "label": "Phone & video calls",
+      "prompts": [
+        "Hello, can you hear me?",
+        "I can't hear you",
+        "The line is bad",
+        "Shall I call you back?",
+        "I'll call you tomorrow",
+        "Did you see my message?",
+        "I'll send a photo",
+        "Let's do a video call",
+        "The network is bad here",
+        "I'll give him the phone"
+      ]
+    },
+    {
+      "id": "routine",
+      "label": "Times of day & routine",
+      "prompts": [
+        "Morning",
+        "Evening",
+        "Night",
+        "In the morning",
+        "At night",
+        "Early",
+        "Late",
+        "It's getting late",
+        "Already",
+        "Every day",
+        "Sometimes",
+        "Always",
+        "Never",
+        "Again",
+        "I woke up",
+        "I'm getting ready",
+        "I'm going to work",
+        "I've come back",
+        "What time?"
+      ]
+    },
+    {
+      "id": "outside",
+      "label": "Going out & shopping",
+      "prompts": [
+        "I'm going out",
+        "When are you coming back?",
+        "Let's go to the shop",
+        "Let's buy this",
+        "How much is this?",
+        "It's expensive",
+        "It's cheap",
+        "I don't want it",
+        "Who came?",
+        "Someone is at the door",
+        "Have you reached?",
+        "I've reached",
+        "Be careful on the way",
+        "Come home soon",
+        "Let's eat outside today",
+        "Let's go to the temple"
+      ]
+    },
+    {
+      "id": "health",
+      "label": "My health",
+      "prompts": [
+        "I have a fever",
+        "My stomach is paining",
+        "I'm sleepy",
+        "I didn't sleep well",
+        "I need to take my medicine",
+        "It hurts",
+        "I'm fine now",
+        "Nothing serious",
+        "I'm a little tired",
+        "Drink hot water"
+      ]
+    },
+    {
+      "id": "weather",
+      "label": "Weather",
+      "prompts": [
+        "It's very hot",
+        "It's cold",
+        "It's raining",
+        "Take an umbrella",
+        "The sun is strong",
+        "It's windy",
+        "Close the window",
+        "Open the window"
+      ]
+    },
+    {
+      "id": "people2",
+      "label": "In-law kinship terms",
+      "prompts": [
+        "Mother-in-law (what I call her)",
+        "Father-in-law (what I call him)",
+        "Husband",
+        "Husband's elder brother",
+        "Husband's elder brother's wife",
+        "Husband's younger brother",
+        "Husband's sister",
+        "The children",
+        "Baby",
+        "Friend",
+        "Guest",
+        "Everyone"
+      ]
+    },
+    {
+      "id": "politeness",
+      "label": "Politeness (retry)",
+      "prompts": [
+        "Thank you",
+        "Sorry",
+        "Please",
+        "Good morning",
+        "Good night",
+        "Hello (answering the phone)",
+        "Excuse me, move aside",
+        "Welcome, come in and sit"
+      ]
+    },
+    {
+      "id": "grammar",
+      "label": "Contrast sets",
+      "prompts": [
+        "Come! (telling someone to come)",
+        "I will come",
+        "I am coming",
+        "Are you coming?",
+        "I'm not coming",
+        "Eat! (telling someone to eat)",
+        "I will eat",
+        "I am eating",
+        "Are you eating?",
+        "I'm not eating",
+        "Do it!",
+        "I will do it",
+        "I am doing it",
+        "Are you doing it?",
+        "I'm not doing it"
+      ]
     }
   ]
 }
