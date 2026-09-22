@@ -961,5 +961,950 @@
     "audio": "0111.mp3",
     "category": "dailylife",
     "note": ""
+  },
+  {
+    "id": "0112",
+    "sa": "isaya?",
+    "en": "Really?",
+    "lit": "",
+    "audio": "0112.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0113",
+    "sa": "haan serkasu",
+    "en": "Of course",
+    "lit": "",
+    "audio": "0113.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0114",
+    "sa": "kai keratha",
+    "en": "What to do",
+    "lit": "",
+    "audio": "0114.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0115",
+    "sa": "soduvo",
+    "en": "Leave it",
+    "lit": "",
+    "audio": "0115.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0116",
+    "sa": "konga kalaas",
+    "en": "Who knows",
+    "lit": "",
+    "audio": "0116.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0117",
+    "sa": "isa lavarya",
+    "en": "I think so",
+    "lit": "",
+    "audio": "0117.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0118",
+    "sa": "ila savo",
+    "en": "Look at this",
+    "lit": "",
+    "audio": "0118.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0119",
+    "sa": "halu halu",
+    "en": "Slowly, slowly",
+    "lit": "",
+    "audio": "0119.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0120",
+    "sa": "koni nha",
+    "en": "Nothing",
+    "lit": "",
+    "audio": "0120.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0121",
+    "sa": "ila madhiriya",
+    "en": "Like this?",
+    "lit": "",
+    "audio": "0121.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0122",
+    "sa": "solobar",
+    "en": "Morning",
+    "lit": "",
+    "audio": "0122.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0123",
+    "sa": "surum",
+    "en": "Early/fast",
+    "lit": "",
+    "audio": "0123.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0124",
+    "sa": "ikaam huyirasi",
+    "en": "Already happened",
+    "lit": "",
+    "audio": "0124.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0125",
+    "sa": "aski dhinu",
+    "en": "Every day",
+    "lit": "",
+    "audio": "0125.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0126",
+    "sa": "okovaal",
+    "en": "Sometimes",
+    "lit": "",
+    "audio": "0126.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0127",
+    "sa": "askivaal",
+    "en": "Always",
+    "lit": "",
+    "audio": "0127.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0128",
+    "sa": "angondaal",
+    "en": "Again",
+    "lit": "",
+    "audio": "0128.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0129",
+    "sa": "me fulidriyo",
+    "en": "I woke up",
+    "lit": "",
+    "audio": "0129.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0130",
+    "sa": "me ready kelle sethe",
+    "en": "I'm getting ready",
+    "lit": "",
+    "audio": "0130.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0131",
+    "sa": "me kaamug jaanjaryo",
+    "en": "I'm going to work",
+    "lit": "",
+    "audio": "0131.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0132",
+    "sa": "mi avdriyo",
+    "en": "I've come back",
+    "lit": "",
+    "audio": "0132.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0133",
+    "sa": "kola ghendagu",
+    "en": "What time?",
+    "lit": "",
+    "audio": "0133.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0134",
+    "sa": "moga help kerasunya",
+    "en": "Can you help me?",
+    "lit": "",
+    "audio": "0134.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0135",
+    "sa": "thunga onta pusuvya",
+    "en": "Can I ask you something?",
+    "lit": "",
+    "audio": "0135.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0136",
+    "sa": "me avuya",
+    "en": "Shall I come?",
+    "lit": "",
+    "audio": "0136.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0137",
+    "sa": "ami jengen ya",
+    "en": "Shall we go?",
+    "lit": "",
+    "audio": "0137.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0138",
+    "sa": "me ila keruvya",
+    "en": "Shall I do it?",
+    "lit": "",
+    "audio": "0138.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0139",
+    "sa": "me heladhu kerusi",
+    "en": "I'll do it later",
+    "lit": "",
+    "audio": "0139.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0140",
+    "sa": "ila khalli avasunya",
+    "en": "Can you bring it?",
+    "lit": "",
+    "audio": "0140.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0141",
+    "sa": "moga dhekadasunya",
+    "en": "Can you show me?",
+    "lit": "",
+    "audio": "0141.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0142",
+    "sa": "moga sanguvo",
+    "en": "Please tell me",
+    "lit": "",
+    "audio": "0142.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0143",
+    "sa": "kosa mi savus",
+    "en": "Let me see",
+    "lit": "",
+    "audio": "0143.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0144",
+    "sa": "angondaal sangasun ya",
+    "en": "Can you say that again?",
+    "lit": "",
+    "audio": "0144.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0145",
+    "sa": "soduvo",
+    "en": "Leave it / forget it",
+    "lit": "",
+    "audio": "0145.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0146",
+    "sa": "erkanave huyiryo",
+    "en": "Already happened",
+    "lit": "",
+    "audio": "0146.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0147",
+    "sa": "me ila keruvya",
+    "en": "Shall I do it?",
+    "lit": "",
+    "audio": "0147.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0148",
+    "sa": "thumi kaai sangeyo",
+    "en": "What did you say?",
+    "lit": "",
+    "audio": "0148.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0149",
+    "sa": "moga aikeni",
+    "en": "I couldn't hear",
+    "lit": "",
+    "audio": "0149.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0150",
+    "sa": "angum uva hallu sangasun ya",
+    "en": "Can you speak a little slower?",
+    "lit": "",
+    "audio": "0150.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0151",
+    "sa": "ila kongayo",
+    "en": "Whose is this?",
+    "lit": "",
+    "audio": "0151.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0152",
+    "sa": "kolle",
+    "en": "Which one?",
+    "lit": "",
+    "audio": "0152.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0153",
+    "sa": "me avusi",
+    "en": "I will come",
+    "lit": "",
+    "audio": "0153.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0154",
+    "sa": "me avle sethe",
+    "en": "I am coming",
+    "lit": "",
+    "audio": "0154.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0155",
+    "sa": "thumi avaryaya",
+    "en": "Are you coming?",
+    "lit": "",
+    "audio": "0155.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0156",
+    "sa": "me avarya nhi",
+    "en": "I'm not coming",
+    "lit": "",
+    "audio": "0156.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0157",
+    "sa": "khavo",
+    "en": "Eat",
+    "lit": "",
+    "audio": "0157.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0158",
+    "sa": "me khavusi",
+    "en": "I will eat",
+    "lit": "",
+    "audio": "0158.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0159",
+    "sa": "me khaile sethe",
+    "en": "I am eating",
+    "lit": "",
+    "audio": "0159.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0160",
+    "sa": "thumi khaarya ya",
+    "en": "Are you eating?",
+    "lit": "",
+    "audio": "0160.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0161",
+    "sa": "me kharya nhi",
+    "en": "I'm not eating",
+    "lit": "",
+    "audio": "0161.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0162",
+    "sa": "ila keruvo",
+    "en": "Do it",
+    "lit": "",
+    "audio": "0162.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0163",
+    "sa": "me kerusi",
+    "en": "I will do it",
+    "lit": "",
+    "audio": "0163.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0164",
+    "sa": "me khele sethey",
+    "en": "I am doing it",
+    "lit": "",
+    "audio": "0164.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0165",
+    "sa": "thumi kerarya ya",
+    "en": "Are you doing it?",
+    "lit": "",
+    "audio": "0165.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0166",
+    "sa": "me kerarya nhi",
+    "en": "I'm not doing it",
+    "lit": "",
+    "audio": "0166.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0167",
+    "sa": "uva othuvo ga",
+    "en": "little move aside",
+    "lit": "",
+    "audio": "0167.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0168",
+    "sa": "avo bhithar avi bisuvo",
+    "en": "Welcome, come in and sit",
+    "lit": "",
+    "audio": "0168.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0169",
+    "sa": "mora kuchi juku kerrras si",
+    "en": "You've done so much for me",
+    "lit": "",
+    "audio": "0169.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0170",
+    "sa": "me sondhos kan se",
+    "en": "I'm very happy",
+    "lit": "",
+    "audio": "0170.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0171",
+    "sa": "moga juku opesi",
+    "en": "I liked it very much",
+    "lit": "",
+    "audio": "0171.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0172",
+    "sa": "thunga sathomam juku sandhosu",
+    "en": "I'm happy to see you",
+    "lit": "",
+    "audio": "0172.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0173",
+    "sa": "sorry mora thapus si",
+    "en": "Sorry, it's my mistake",
+    "lit": "",
+    "audio": "0173.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0174",
+    "sa": "moga manichuduvo",
+    "en": "Please forgive me",
+    "lit": "",
+    "audio": "0174.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0175",
+    "sa": "rhaandho",
+    "en": "It's alright",
+    "lit": "",
+    "audio": "0175.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0176",
+    "sa": "ikaam huyirasya",
+    "en": "is it done Already",
+    "lit": "",
+    "audio": "0176.mp3",
+    "category": "essentials",
+    "note": ""
+  },
+  {
+    "id": "0177",
+    "sa": "ila me keruvya",
+    "en": "Shall I do it?",
+    "lit": "",
+    "audio": "0177.mp3",
+    "category": "talking",
+    "note": ""
+  },
+  {
+    "id": "0178",
+    "sa": "mora pathi kavala podnagan",
+    "en": "Please don't worry about me",
+    "lit": "",
+    "audio": "0178.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0179",
+    "sa": "ami avdriyo",
+    "en": "We have come",
+    "lit": "",
+    "audio": "0179.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0180",
+    "sa": "ila me kod thovu",
+    "en": "Where should I keep this?",
+    "lit": "",
+    "audio": "0180.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0181",
+    "sa": "ila ami thura kuchi khali avriyo",
+    "en": "We brought this for you",
+    "lit": "",
+    "audio": "0181.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0182",
+    "sa": "ami niguluvesi",
+    "en": "We should leave now",
+    "lit": "",
+    "audio": "0182.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0183",
+    "sa": "anga late huyarasi",
+    "en": "It's getting late for us",
+    "lit": "",
+    "audio": "0183.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0184",
+    "sa": "aski thega thanksu",
+    "en": "Thank you for everything",
+    "lit": "",
+    "audio": "0184.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0185",
+    "sa": "ami angondaal avesi",
+    "en": "We'll come again soon",
+    "lit": "",
+    "audio": "0185.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0186",
+    "sa": "ghoma avo",
+    "en": "Please come to our house",
+    "lit": "",
+    "audio": "0186.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0187",
+    "sa": "ami ghoma reach huyirya",
+    "en": "We reached home safely",
+    "lit": "",
+    "audio": "0187.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0188",
+    "sa": "ami niguluvesi",
+    "en": "We're leaving now",
+    "lit": "",
+    "audio": "0188.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0189",
+    "sa": "journey kona hodhesi",
+    "en": "How was the journey?",
+    "lit": "",
+    "audio": "0189.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0190",
+    "sa": "avi anga dhekuvo",
+    "en": "Please come and visit us",
+    "lit": "",
+    "audio": "0190.mp3",
+    "category": "courtesy",
+    "note": ""
+  },
+  {
+    "id": "0191",
+    "sa": "thumi ven chod handharasi",
+    "en": "You cook so well",
+    "lit": "",
+    "audio": "0191.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0192",
+    "sa": "me juku khaidiryo",
+    "en": "I ate a lot",
+    "lit": "",
+    "audio": "0192.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0193",
+    "sa": "fijayi",
+    "en": "No more, thank you",
+    "lit": "",
+    "audio": "0193.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0194",
+    "sa": "me thovlusi",
+    "en": "I'll take it myself",
+    "lit": "",
+    "audio": "0194.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0195",
+    "sa": "me thunga thovuya",
+    "en": "Shall I serve you?",
+    "lit": "",
+    "audio": "0195.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0196",
+    "sa": "me erkanave khaidirya",
+    "en": "I've already eaten",
+    "lit": "",
+    "audio": "0196.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0197",
+    "sa": "me ila khaana",
+    "en": "I don't eat that",
+    "lit": "",
+    "audio": "0197.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0198",
+    "sa": "moga ila thika lavarasi",
+    "en": "It's a little spicy for me",
+    "lit": "",
+    "audio": "0198.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0199",
+    "sa": "moga uva pani dhesunya",
+    "en": "Can I have some water?",
+    "lit": "",
+    "audio": "0199.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0200",
+    "sa": "ilaga naav kaya",
+    "en": "What is this dish called?",
+    "lit": "",
+    "audio": "0200.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0201",
+    "sa": "ila kona keratha sikadi dhevo",
+    "en": "Teach me how to make this",
+    "lit": "",
+    "audio": "0201.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0202",
+    "sa": "me dhoovlusi",
+    "en": "I'll wash my plate",
+    "lit": "",
+    "audio": "0202.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0203",
+    "sa": "chokod vasuna avarasi",
+    "en": "It smells very good",
+    "lit": "",
+    "audio": "0203.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0204",
+    "sa": "me heladhu khavusi",
+    "en": "I'll eat later",
+    "lit": "",
+    "audio": "0204.mp3",
+    "category": "food",
+    "note": ""
+  },
+  {
+    "id": "0205",
+    "sa": "pilalnu",
+    "en": "The children",
+    "lit": "",
+    "audio": "0205.mp3",
+    "category": "family",
+    "note": ""
+  },
+  {
+    "id": "0206",
+    "sa": "aski dhenu",
+    "en": "Everyone",
+    "lit": "",
+    "audio": "0206.mp3",
+    "category": "family",
+    "note": ""
+  },
+  {
+    "id": "0207",
+    "sa": "thumi askidhenu sowriyam ya",
+    "en": "How are you all?",
+    "lit": "",
+    "audio": "0207.mp3",
+    "category": "family",
+    "note": ""
+  },
+  {
+    "id": "0208",
+    "sa": "ghoma aski dhenu sowriyam ya",
+    "en": "How is everyone at home?",
+    "lit": "",
+    "audio": "0208.mp3",
+    "category": "family",
+    "note": ""
+  },
+  {
+    "id": "0209",
+    "sa": "thenu kaamum sethe",
+    "en": "He is at work",
+    "lit": "",
+    "audio": "0209.mp3",
+    "category": "family",
+    "note": ""
+  },
+  {
+    "id": "0210",
+    "sa": "thenu avle sethe",
+    "en": "He is coming",
+    "lit": "",
+    "audio": "0210.mp3",
+    "category": "family",
+    "note": ""
+  },
+  {
+    "id": "0211",
+    "sa": "thumi hinda kaai keriyasi",
+    "en": "What did you do today?",
+    "lit": "",
+    "audio": "0211.mp3",
+    "category": "family",
+    "note": ""
+  },
+  {
+    "id": "0212",
+    "sa": "thumi hindha bharad jeyasya",
+    "en": "Did you go out today?",
+    "lit": "",
+    "audio": "0212.mp3",
+    "category": "family",
+    "note": ""
+  },
+  {
+    "id": "0213",
+    "sa": "ghoma dhusra kon sethe",
+    "en": "Who else is at home?",
+    "lit": "",
+    "audio": "0213.mp3",
+    "category": "family",
+    "note": ""
+  },
+  {
+    "id": "0214",
+    "sa": "phone thengajal dhevo",
+    "en": "Please give him the phone",
+    "lit": "",
+    "audio": "0214.mp3",
+    "category": "family",
+    "note": ""
+  },
+  {
+    "id": "0215",
+    "sa": "aski thenga pusilel meni sanguvo",
+    "en": "Say hello to everyone",
+    "lit": "",
+    "audio": "0215.mp3",
+    "category": "family",
+    "note": ""
+  },
+  {
+    "id": "0216",
+    "sa": "me thenga sangusi",
+    "en": "I'll tell him",
+    "lit": "",
+    "audio": "0216.mp3",
+    "category": "family",
+    "note": ""
   }
 ]
